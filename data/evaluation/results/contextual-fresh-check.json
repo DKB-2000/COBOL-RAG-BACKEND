@@ -1,0 +1,2876 @@
+{
+  "configuration": {
+    "chroma_version": "1.5.9",
+    "embedding_function": "default",
+    "model": "all-MiniLM-L6-v2",
+    "distance": "cosine",
+    "chunking": "cobol-structure-v1",
+    "embedding_input": "source-path-symbol-text-v1",
+    "data_root": "D:\\BackEnd_Project\\legacy-rag-backend\\data",
+    "dataset_path": "D:\\BackEnd_Project\\legacy-rag-backend\\data\\evaluation\\questions-v1.jsonl",
+    "chroma_path": "D:\\BackEnd_Project\\legacy-rag-backend\\data\\chroma\\contextual-fresh-check",
+    "structured_baseline_path": "D:\\BackEnd_Project\\legacy-rag-backend\\data\\evaluation\\results\\structured-baseline-v1.json"
+  },
+  "chunk_count": 52,
+  "raw_structured_metrics": {
+    "hit_at_1": 0.2916666666666667,
+    "hit_at_3": 0.7083333333333334,
+    "hit_at_5": 1.0,
+    "mrr": 0.529861111111111
+  },
+  "contextual_metrics": {
+    "hit_at_1": 0.2916666666666667,
+    "hit_at_3": 0.8333333333333334,
+    "hit_at_5": 1.0,
+    "mrr": 0.5493055555555555
+  },
+  "deltas": {
+    "hit_at_1": 0.0,
+    "hit_at_3": 0.125,
+    "hit_at_5": 0.0,
+    "mrr": 0.019444444444444486
+  },
+  "report": {
+    "evaluated_cases": 24,
+    "hit_at_k": 1.0,
+    "mrr": 0.5493055555555555,
+    "case_results": [
+      {
+        "case_id": "q001",
+        "question": "고객 입력 파일을 여는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q002",
+        "question": "고객 입력의 파일 끝을 감지하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q003",
+        "question": "고객 레코드의 ID, 이름, 상태를 검사하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q004",
+        "question": "유효하지 않은 고객 레코드는 어느 문단에서 오류 파일에 기록되는가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.2
+      },
+      {
+        "case_id": "q005",
+        "question": "고객 가져오기 프로그램의 반복 처리를 시작하는 최상위 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q006",
+        "question": "입금과 출금을 구분하는 문단과 구문은 무엇인가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/account-balance.cbl",
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q007",
+        "question": "0 이하의 입금액은 어떤 결과 코드로 거절되는가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q008",
+        "question": "출금 후 잔액이 음수이면 계정 상태는 어떻게 변경되는가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q009",
+        "question": "ACCOUNT-BALANCE가 호출자에게 돌려주는 세 개의 LINKAGE 항목은 무엇인가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/daily-report.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q010",
+        "question": "최대 잔액 초과 여부는 어느 문단에서 검사되는가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q011",
+        "question": "거래 파일의 레코드를 메모리 테이블에 적재하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q012",
+        "question": "거래 메모리 테이블은 최대 몇 건을 보관하도록 정의되어 있는가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.2
+      },
+      {
+        "case_id": "q013",
+        "question": "적재된 거래를 순회할 때 사용하는 인덱스는 무엇인가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q014",
+        "question": "TRANSACTION-POST가 잔액 계산을 위해 호출하는 프로그램은 무엇인가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl",
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/transaction-post.cbl",
+          "samples/account-balance.cbl",
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q015",
+        "question": "잔액 처리 결과 코드 04는 어느 문단에서 계정 보류 메시지로 처리되는가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q016",
+        "question": "일일 보고서 날짜를 포맷하기 위해 호출하는 프로그램은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q017",
+        "question": "계정 수와 총잔액을 누적하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q018",
+        "question": "활성 계정과 보류 계정은 어떤 필드를 기준으로 나뉘는가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q019",
+        "question": "보고서 한 줄을 조립하고 출력하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.2
+      },
+      {
+        "case_id": "q020",
+        "question": "일일 보고서 프로그램이 읽는 입력 파일의 SELECT 이름은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q021",
+        "question": "8자리 날짜를 연도, 월, 일로 분리하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q022",
+        "question": "월 값의 유효 범위는 어느 문단에서 검사되는가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q023",
+        "question": "날짜 검증이 성공했을 때 사용하는 결과 코드는 무엇인가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q024",
+        "question": "DATE-UTILITY가 호출자에게 반환하는 포맷된 날짜 필드는 무엇인가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/account-balance.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      }
+    ]
+  },
+  "retrieved_chunks_by_case_id": {
+    "q001": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.16625916957855225
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.154313862323761
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.15330439805984497
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.15142738819122314
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.14682543277740479
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.14268434047698975
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.13368147611618042
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.11886537075042725
+      },
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.11705183982849121
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.11284053325653076
+      }
+    ],
+    "q002": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.138289213180542
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.13588547706604004
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.12128186225891113
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.11743044853210449
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.11129838228225708
+      },
+      {
+        "chunk_id": "1ef43dac92082f8e7c42497199fd4ee2ab0d758ea81a00a762bca5e791e9a2b8",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-FILE           VALUE \"Y\".\n       01  WS-VALID-CUSTOMER        PIC X VALUE \"N\".\n           88 VALID-CUSTOMER        VALUE \"Y\".\n       01  WS-COUNTS.\n           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.\n           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.\n           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 5,
+        "score": 0.1090279221534729
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.10701757669448853
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.09219413995742798
+      },
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.09029054641723633
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.08978837728500366
+      }
+    ],
+    "q003": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.16704195737838745
+      },
+      {
+        "chunk_id": "3891e798acaba2e59792b09089df8ce6474fc11a9659775b3b9161e7f9d5477d",
+        "text": "       IDENTIFICATION DIVISION.\n       PROGRAM-ID. TRANSACTION-POST.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "IDENTIFICATION DIVISION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 0,
+        "score": 0.1558234691619873
+      },
+      {
+        "chunk_id": "1d42798f31ea1abed91252af0ef42bf005437b34c093c8a6f60e749ac7b59eed",
+        "text": "       HANDLE-POST-RESULT.\n           EVALUATE WS-RESULT-CODE\n               WHEN \"00\" CONTINUE\n               WHEN \"04\" DISPLAY \"ACCOUNT ON HOLD: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n               WHEN OTHER DISPLAY \"TRANSACTION REJECTED: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n           END-EVALUATE.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "HANDLE-POST-RESULT",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 10,
+        "score": 0.1423814296722412
+      },
+      {
+        "chunk_id": "a53f33fce5b262971db6b6ebe211b415a2e34edd257d37f86402173dd7315c13",
+        "text": "       IDENTIFICATION DIVISION.\n       PROGRAM-ID. CUSTOMER-IMPORT.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "IDENTIFICATION DIVISION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 0,
+        "score": 0.1415116786956787
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.13726192712783813
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.12829816341400146
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.1263521909713745
+      },
+      {
+        "chunk_id": "d5651db6e93f498b461590f959930d410d69e8a3db62ac84816683da8304bf85",
+        "text": "       IDENTIFICATION DIVISION.\n       PROGRAM-ID. DAILY-REPORT.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "IDENTIFICATION DIVISION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 0,
+        "score": 0.12587767839431763
+      },
+      {
+        "chunk_id": "e6a8ef642dfa5c36a83fe4a387d8c323dfb68bcd65dd96a2f79dc0dc02480bd6",
+        "text": "       FILE SECTION.\n       FD  TRANSACTION-IN.\n       01  TRANSACTION-INPUT-RECORD.\n           05 TI-ACCOUNT-ID         PIC 9(8).\n           05 TI-TYPE               PIC X.\n           05 TI-AMOUNT             PIC S9(7)V99.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "FILE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 4,
+        "score": 0.12423121929168701
+      },
+      {
+        "chunk_id": "7c5f4cbbf2ae870170930ab7e2baec597af424568984bc5c602e840b0738e928",
+        "text": "       IDENTIFICATION DIVISION.\n       PROGRAM-ID. ACCOUNT-BALANCE.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "IDENTIFICATION DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 0,
+        "score": 0.11348885297775269
+      }
+    ],
+    "q004": [
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.18557804822921753
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.17978054285049438
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.17364704608917236
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.1644524335861206
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.14053893089294434
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.12715625762939453
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.12561404705047607
+      },
+      {
+        "chunk_id": "e6a8ef642dfa5c36a83fe4a387d8c323dfb68bcd65dd96a2f79dc0dc02480bd6",
+        "text": "       FILE SECTION.\n       FD  TRANSACTION-IN.\n       01  TRANSACTION-INPUT-RECORD.\n           05 TI-ACCOUNT-ID         PIC 9(8).\n           05 TI-TYPE               PIC X.\n           05 TI-AMOUNT             PIC S9(7)V99.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "FILE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 4,
+        "score": 0.1142166256904602
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.1110917329788208
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.11031931638717651
+      }
+    ],
+    "q005": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.14016848802566528
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.14016234874725342
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.13969463109970093
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.12795865535736084
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.12343853712081909
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.12187880277633667
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.11516165733337402
+      },
+      {
+        "chunk_id": "1ef43dac92082f8e7c42497199fd4ee2ab0d758ea81a00a762bca5e791e9a2b8",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-FILE           VALUE \"Y\".\n       01  WS-VALID-CUSTOMER        PIC X VALUE \"N\".\n           88 VALID-CUSTOMER        VALUE \"Y\".\n       01  WS-COUNTS.\n           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.\n           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.\n           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 5,
+        "score": 0.09143906831741333
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.08376872539520264
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.0812113881111145
+      }
+    ],
+    "q006": [
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.1448720097541809
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.1389087438583374
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.12895357608795166
+      },
+      {
+        "chunk_id": "1ef43dac92082f8e7c42497199fd4ee2ab0d758ea81a00a762bca5e791e9a2b8",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-FILE           VALUE \"Y\".\n       01  WS-VALID-CUSTOMER        PIC X VALUE \"N\".\n           88 VALID-CUSTOMER        VALUE \"Y\".\n       01  WS-COUNTS.\n           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.\n           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.\n           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 5,
+        "score": 0.1264028549194336
+      },
+      {
+        "chunk_id": "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE            PIC X VALUE \"N\".\n           88 END-OF-ACCOUNTS        VALUE \"Y\".\n       01  WS-RUN-DATE               PIC X(8) VALUE \"20261001\".\n       01  WS-FORMATTED-DATE          PIC X(10).\n       01  WS-DATE-RESULT             PIC XX.\n       01  WS-SUMMARY.\n           05 WS-ACCOUNT-COUNT       PIC 9(6) VALUE ZERO.\n           05 WS-ACTIVE-COUNT        PIC 9(6) VALUE ZERO.\n           05 WS-HOLD-COUNT          PIC 9(6) VALUE ZERO.\n           05 WS-TOTAL-BALANCE       PIC S9(11)V99 VALUE ZERO.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 5,
+        "score": 0.11759328842163086
+      },
+      {
+        "chunk_id": "731a6590fa98d78e3889820dab9bcb6ed3633add33d812845821c403400e7de2",
+        "text": "       FILE SECTION.\n       FD  CUSTOMER-IN.\n       01  CUSTOMER-INPUT-RECORD.\n           05 CI-ID                 PIC 9(6).\n           05 CI-NAME               PIC X(30).\n           05 CI-STATUS             PIC X.\n       FD  CUSTOMER-OUT.\n       01  CUSTOMER-OUTPUT-RECORD   PIC X(37).\n       FD  CUSTOMER-ERROR.\n       01  CUSTOMER-ERROR-RECORD    PIC X(60).\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "FILE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 4,
+        "score": 0.11547994613647461
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.11521327495574951
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.11478590965270996
+      },
+      {
+        "chunk_id": "8c40ca8b83cd23fcc4c2b240c76a884c305d90c3975dfb79c653d6c0e877575a",
+        "text": "       MAIN-PROCESS.\n           PERFORM FORMAT-REPORT-DATE\n           OPEN INPUT ACCOUNT-IN OUTPUT REPORT-OUT\n           PERFORM READ-AND-SUMMARIZE UNTIL END-OF-ACCOUNTS\n           PERFORM WRITE-SUMMARY\n           CLOSE ACCOUNT-IN REPORT-OUT\n           GOBACK.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 7,
+        "score": 0.11439645290374756
+      },
+      {
+        "chunk_id": "2497d5f4f70ee2cf5231d46aa41fea917959178b1b79f282271882dde2461f22",
+        "text": "       INPUT-OUTPUT SECTION.\n       FILE-CONTROL.\n           SELECT CUSTOMER-IN ASSIGN TO \"customers.dat\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n           SELECT CUSTOMER-OUT ASSIGN TO \"customers.valid\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n           SELECT CUSTOMER-ERROR ASSIGN TO \"customers.error\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "INPUT-OUTPUT SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 2,
+        "score": 0.11110198497772217
+      }
+    ],
+    "q007": [
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.12186628580093384
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.11916905641555786
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.10894817113876343
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.10399121046066284
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.09553080797195435
+      },
+      {
+        "chunk_id": "904bb704c2ff72ef3929e7336d995f193dcca3e8ef50990d840b8747ae0df3b2",
+        "text": "       PROCEDURE DIVISION.\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 6,
+        "score": 0.09282457828521729
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.09028398990631104
+      },
+      {
+        "chunk_id": "44b21d6ec6f054243998f52e116ae4d33a08aa88f0721680d33dd086df5d9791",
+        "text": "       DATA DIVISION.\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "DATA DIVISION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 3,
+        "score": 0.08839249610900879
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.08311355113983154
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.08078902959823608
+      }
+    ],
+    "q008": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.18661808967590332
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.1627265214920044
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.1599487066268921
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.15701568126678467
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.15451431274414062
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.1473478078842163
+      },
+      {
+        "chunk_id": "1ef43dac92082f8e7c42497199fd4ee2ab0d758ea81a00a762bca5e791e9a2b8",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-FILE           VALUE \"Y\".\n       01  WS-VALID-CUSTOMER        PIC X VALUE \"N\".\n           88 VALID-CUSTOMER        VALUE \"Y\".\n       01  WS-COUNTS.\n           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.\n           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.\n           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 5,
+        "score": 0.1464635133743286
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.145560622215271
+      },
+      {
+        "chunk_id": "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE            PIC X VALUE \"N\".\n           88 END-OF-ACCOUNTS        VALUE \"Y\".\n       01  WS-RUN-DATE               PIC X(8) VALUE \"20261001\".\n       01  WS-FORMATTED-DATE          PIC X(10).\n       01  WS-DATE-RESULT             PIC XX.\n       01  WS-SUMMARY.\n           05 WS-ACCOUNT-COUNT       PIC 9(6) VALUE ZERO.\n           05 WS-ACTIVE-COUNT        PIC 9(6) VALUE ZERO.\n           05 WS-HOLD-COUNT          PIC 9(6) VALUE ZERO.\n           05 WS-TOTAL-BALANCE       PIC S9(11)V99 VALUE ZERO.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 5,
+        "score": 0.14431220293045044
+      },
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.1432727575302124
+      }
+    ],
+    "q009": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.4604295492172241
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.40569692850112915
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.3955082893371582
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.38477545976638794
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.3751664161682129
+      },
+      {
+        "chunk_id": "013f56880a9d4d9e0a142726128d603d55c4a817ebf5eb89f8b0482a5ee06033",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-MAX-BALANCE           PIC S9(9)V99 VALUE 999999999.99.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 2,
+        "score": 0.3652315139770508
+      },
+      {
+        "chunk_id": "6db32f3b68c14bc0bf86ee8ded79043387a87d67b04fd7ae773df1068e538aff",
+        "text": "       DATA DIVISION.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "DATA DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 1,
+        "score": 0.3499530553817749
+      },
+      {
+        "chunk_id": "7c5f4cbbf2ae870170930ab7e2baec597af424568984bc5c602e840b0738e928",
+        "text": "       IDENTIFICATION DIVISION.\n       PROGRAM-ID. ACCOUNT-BALANCE.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "IDENTIFICATION DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 0,
+        "score": 0.34429454803466797
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.3411509394645691
+      },
+      {
+        "chunk_id": "d5787a05114a225f5f23bfedf46794b4df0a56dcb4ed65ed98a78d6bb6a6e628",
+        "text": "       READ-AND-SUMMARIZE.\n           READ ACCOUNT-IN\n               AT END\n                   SET END-OF-ACCOUNTS TO TRUE\n               NOT AT END\n                   ADD 1 TO WS-ACCOUNT-COUNT\n                   ADD AR-BALANCE TO WS-TOTAL-BALANCE\n                   IF AR-STATUS = \"A\"\n                       ADD 1 TO WS-ACTIVE-COUNT\n                   ELSE\n                       ADD 1 TO WS-HOLD-COUNT\n                   END-IF\n           END-READ.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "READ-AND-SUMMARIZE",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 9,
+        "score": 0.3072601556777954
+      }
+    ],
+    "q010": [
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.20179319381713867
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.19772040843963623
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.19223862886428833
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.17576801776885986
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.16081994771957397
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.14855915307998657
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.14705252647399902
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.1457919478416443
+      },
+      {
+        "chunk_id": "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE            PIC X VALUE \"N\".\n           88 END-OF-ACCOUNTS        VALUE \"Y\".\n       01  WS-RUN-DATE               PIC X(8) VALUE \"20261001\".\n       01  WS-FORMATTED-DATE          PIC X(10).\n       01  WS-DATE-RESULT             PIC XX.\n       01  WS-SUMMARY.\n           05 WS-ACCOUNT-COUNT       PIC 9(6) VALUE ZERO.\n           05 WS-ACTIVE-COUNT        PIC 9(6) VALUE ZERO.\n           05 WS-HOLD-COUNT          PIC 9(6) VALUE ZERO.\n           05 WS-TOTAL-BALANCE       PIC S9(11)V99 VALUE ZERO.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 5,
+        "score": 0.13165390491485596
+      },
+      {
+        "chunk_id": "1d42798f31ea1abed91252af0ef42bf005437b34c093c8a6f60e749ac7b59eed",
+        "text": "       HANDLE-POST-RESULT.\n           EVALUATE WS-RESULT-CODE\n               WHEN \"00\" CONTINUE\n               WHEN \"04\" DISPLAY \"ACCOUNT ON HOLD: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n               WHEN OTHER DISPLAY \"TRANSACTION REJECTED: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n           END-EVALUATE.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "HANDLE-POST-RESULT",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 10,
+        "score": 0.12609589099884033
+      }
+    ],
+    "q011": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.099001944065094
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.08911025524139404
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.08419263362884521
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.07808905839920044
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.07615983486175537
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.07029026746749878
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.05616891384124756
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.051275014877319336
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.04377084970474243
+      },
+      {
+        "chunk_id": "1ef43dac92082f8e7c42497199fd4ee2ab0d758ea81a00a762bca5e791e9a2b8",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-FILE           VALUE \"Y\".\n       01  WS-VALID-CUSTOMER        PIC X VALUE \"N\".\n           88 VALID-CUSTOMER        VALUE \"Y\".\n       01  WS-COUNTS.\n           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.\n           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.\n           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 5,
+        "score": 0.03695160150527954
+      }
+    ],
+    "q012": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.22249656915664673
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.21085935831069946
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.19979536533355713
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.18124067783355713
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.1727721095085144
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.16679167747497559
+      },
+      {
+        "chunk_id": "c59c4c107fe3f8f9395225b454d7ef0166459c81c87e3c5d54e1bccb1a4bde9e",
+        "text": "       FORMAT-DATE.\n           MOVE LK-INPUT-DATE(1:4) TO WS-YEAR\n           MOVE LK-INPUT-DATE(5:2) TO WS-MONTH\n           MOVE LK-INPUT-DATE(7:2) TO WS-DAY\n           PERFORM VALIDATE-DATE\n           IF LK-RESULT-CODE = \"00\"\n               STRING WS-YEAR \"-\" WS-MONTH \"-\" WS-DAY\n                   DELIMITED BY SIZE INTO LK-FORMATTED-DATE\n               END-STRING\n           ELSE\n               MOVE SPACES TO LK-FORMATTED-DATE\n           END-IF\n           GOBACK.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "FORMAT-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 5,
+        "score": 0.15759485960006714
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.15703648328781128
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.1442573070526123
+      },
+      {
+        "chunk_id": "90391fef9607adde525b683e608d9ce353faab6b12aac25f8650b3c4b03ae1e0",
+        "text": "       VALIDATE-DATE.\n           MOVE \"00\" TO LK-RESULT-CODE\n           IF WS-MONTH < 1 OR WS-MONTH > 12\n               MOVE \"01\" TO LK-RESULT-CODE\n           ELSE\n               IF WS-DAY < 1 OR WS-DAY > 31\n                   MOVE \"02\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "VALIDATE-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 6,
+        "score": 0.13852369785308838
+      }
+    ],
+    "q013": [
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.2156836986541748
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.21038883924484253
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.20604634284973145
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.20232105255126953
+      },
+      {
+        "chunk_id": "c59c4c107fe3f8f9395225b454d7ef0166459c81c87e3c5d54e1bccb1a4bde9e",
+        "text": "       FORMAT-DATE.\n           MOVE LK-INPUT-DATE(1:4) TO WS-YEAR\n           MOVE LK-INPUT-DATE(5:2) TO WS-MONTH\n           MOVE LK-INPUT-DATE(7:2) TO WS-DAY\n           PERFORM VALIDATE-DATE\n           IF LK-RESULT-CODE = \"00\"\n               STRING WS-YEAR \"-\" WS-MONTH \"-\" WS-DAY\n                   DELIMITED BY SIZE INTO LK-FORMATTED-DATE\n               END-STRING\n           ELSE\n               MOVE SPACES TO LK-FORMATTED-DATE\n           END-IF\n           GOBACK.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "FORMAT-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 5,
+        "score": 0.17122739553451538
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.1699916124343872
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.16988062858581543
+      },
+      {
+        "chunk_id": "90391fef9607adde525b683e608d9ce353faab6b12aac25f8650b3c4b03ae1e0",
+        "text": "       VALIDATE-DATE.\n           MOVE \"00\" TO LK-RESULT-CODE\n           IF WS-MONTH < 1 OR WS-MONTH > 12\n               MOVE \"01\" TO LK-RESULT-CODE\n           ELSE\n               IF WS-DAY < 1 OR WS-DAY > 31\n                   MOVE \"02\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "VALIDATE-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 6,
+        "score": 0.1643473505973816
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.160345196723938
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.1429232954978943
+      }
+    ],
+    "q014": [
+      {
+        "chunk_id": "a386018c5403c1010eb74b4d9b7268567f1bc9a3006cfa5847490ad4710f3e42",
+        "text": "       LOAD-TRANSACTIONS.\n           READ TRANSACTION-IN\n               AT END\n                   SET END-OF-TRANSACTIONS TO TRUE\n               NOT AT END\n                   IF WS-TRANSACTION-COUNT < 20\n                       ADD 1 TO WS-TRANSACTION-COUNT\n                       MOVE TI-ACCOUNT-ID TO\n                           WS-ACCOUNT-ID(WS-TRANSACTION-COUNT)\n                       MOVE TI-TYPE TO\n                           WS-TYPE(WS-TRANSACTION-COUNT)\n                       MOVE TI-AMOUNT TO\n                           WS-AMOUNT(WS-TRANSACTION-COUNT)\n                   END-IF\n           END-READ.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "LOAD-TRANSACTIONS",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 8,
+        "score": 0.3847939968109131
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.3830311894416809
+      },
+      {
+        "chunk_id": "163f426e46387b9a9261863adb10c9c4c74c1983ea3094955ce2803dc2bf8474",
+        "text": "       MAIN-PROCESS.\n           OPEN INPUT TRANSACTION-IN\n           PERFORM LOAD-TRANSACTIONS UNTIL END-OF-TRANSACTIONS\n           CLOSE TRANSACTION-IN\n           PERFORM POST-TRANSACTIONS VARYING WS-INDEX FROM 1 BY 1\n               UNTIL WS-INDEX > WS-TRANSACTION-COUNT\n           GOBACK.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 7,
+        "score": 0.3766733407974243
+      },
+      {
+        "chunk_id": "f1ed1286d93ba629d7ba35065d110019d181113d16099f3e6eefe8260bb8658a",
+        "text": "       INPUT-OUTPUT SECTION.\n       FILE-CONTROL.\n           SELECT TRANSACTION-IN ASSIGN TO \"transactions.dat\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "INPUT-OUTPUT SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 2,
+        "score": 0.37220215797424316
+      },
+      {
+        "chunk_id": "e6a8ef642dfa5c36a83fe4a387d8c323dfb68bcd65dd96a2f79dc0dc02480bd6",
+        "text": "       FILE SECTION.\n       FD  TRANSACTION-IN.\n       01  TRANSACTION-INPUT-RECORD.\n           05 TI-ACCOUNT-ID         PIC 9(8).\n           05 TI-TYPE               PIC X.\n           05 TI-AMOUNT             PIC S9(7)V99.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "FILE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 4,
+        "score": 0.3596268892288208
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.35708296298980713
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.35581517219543457
+      },
+      {
+        "chunk_id": "a61008b04d21b3ec552b9d1de7a211e9a22828af8fced50d1ef69a3153084c6e",
+        "text": "       POST-TRANSACTIONS.\n           MOVE WS-TYPE(WS-INDEX) TO WS-CALL-TYPE\n           MOVE WS-AMOUNT(WS-INDEX) TO WS-CALL-AMOUNT\n           CALL \"ACCOUNT-BALANCE\" USING WS-CALL-TRANSACTION\n                                        WS-CALL-ACCOUNT\n                                        WS-RESULT-CODE\n           PERFORM HANDLE-POST-RESULT.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "POST-TRANSACTIONS",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 9,
+        "score": 0.3478611707687378
+      },
+      {
+        "chunk_id": "1d42798f31ea1abed91252af0ef42bf005437b34c093c8a6f60e749ac7b59eed",
+        "text": "       HANDLE-POST-RESULT.\n           EVALUATE WS-RESULT-CODE\n               WHEN \"00\" CONTINUE\n               WHEN \"04\" DISPLAY \"ACCOUNT ON HOLD: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n               WHEN OTHER DISPLAY \"TRANSACTION REJECTED: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n           END-EVALUATE.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "HANDLE-POST-RESULT",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 10,
+        "score": 0.3338662385940552
+      },
+      {
+        "chunk_id": "c1d8ecdee3c78b96b61dc6d4b5ed9cde548d99ccfa1025f99417718039d0e5a9",
+        "text": "       PROCEDURE DIVISION.\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 6,
+        "score": 0.3115636110305786
+      }
+    ],
+    "q015": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.1763949990272522
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.1684103012084961
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.16467392444610596
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.15701758861541748
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.14254945516586304
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.1347036361694336
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.12749987840652466
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.12472665309906006
+      },
+      {
+        "chunk_id": "90391fef9607adde525b683e608d9ce353faab6b12aac25f8650b3c4b03ae1e0",
+        "text": "       VALIDATE-DATE.\n           MOVE \"00\" TO LK-RESULT-CODE\n           IF WS-MONTH < 1 OR WS-MONTH > 12\n               MOVE \"01\" TO LK-RESULT-CODE\n           ELSE\n               IF WS-DAY < 1 OR WS-DAY > 31\n                   MOVE \"02\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "VALIDATE-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 6,
+        "score": 0.109031081199646
+      },
+      {
+        "chunk_id": "c59c4c107fe3f8f9395225b454d7ef0166459c81c87e3c5d54e1bccb1a4bde9e",
+        "text": "       FORMAT-DATE.\n           MOVE LK-INPUT-DATE(1:4) TO WS-YEAR\n           MOVE LK-INPUT-DATE(5:2) TO WS-MONTH\n           MOVE LK-INPUT-DATE(7:2) TO WS-DAY\n           PERFORM VALIDATE-DATE\n           IF LK-RESULT-CODE = \"00\"\n               STRING WS-YEAR \"-\" WS-MONTH \"-\" WS-DAY\n                   DELIMITED BY SIZE INTO LK-FORMATTED-DATE\n               END-STRING\n           ELSE\n               MOVE SPACES TO LK-FORMATTED-DATE\n           END-IF\n           GOBACK.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "FORMAT-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 5,
+        "score": 0.09550720453262329
+      }
+    ],
+    "q016": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.17083781957626343
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.1477205753326416
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.143141508102417
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.13144266605377197
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.1310352087020874
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.1306944489479065
+      },
+      {
+        "chunk_id": "1ef43dac92082f8e7c42497199fd4ee2ab0d758ea81a00a762bca5e791e9a2b8",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-FILE           VALUE \"Y\".\n       01  WS-VALID-CUSTOMER        PIC X VALUE \"N\".\n           88 VALID-CUSTOMER        VALUE \"Y\".\n       01  WS-COUNTS.\n           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.\n           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.\n           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 5,
+        "score": 0.11416709423065186
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.11231350898742676
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.10985386371612549
+      },
+      {
+        "chunk_id": "90391fef9607adde525b683e608d9ce353faab6b12aac25f8650b3c4b03ae1e0",
+        "text": "       VALIDATE-DATE.\n           MOVE \"00\" TO LK-RESULT-CODE\n           IF WS-MONTH < 1 OR WS-MONTH > 12\n               MOVE \"01\" TO LK-RESULT-CODE\n           ELSE\n               IF WS-DAY < 1 OR WS-DAY > 31\n                   MOVE \"02\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "VALIDATE-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 6,
+        "score": 0.10490691661834717
+      }
+    ],
+    "q017": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.1369953155517578
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.11929678916931152
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.11704111099243164
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.11505770683288574
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.11203569173812866
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.10481321811676025
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.09163153171539307
+      },
+      {
+        "chunk_id": "1d42798f31ea1abed91252af0ef42bf005437b34c093c8a6f60e749ac7b59eed",
+        "text": "       HANDLE-POST-RESULT.\n           EVALUATE WS-RESULT-CODE\n               WHEN \"00\" CONTINUE\n               WHEN \"04\" DISPLAY \"ACCOUNT ON HOLD: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n               WHEN OTHER DISPLAY \"TRANSACTION REJECTED: \"\n                                  WS-ACCOUNT-ID(WS-INDEX)\n           END-EVALUATE.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "HANDLE-POST-RESULT",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 10,
+        "score": 0.08102500438690186
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.0785064697265625
+      },
+      {
+        "chunk_id": "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE            PIC X VALUE \"N\".\n           88 END-OF-ACCOUNTS        VALUE \"Y\".\n       01  WS-RUN-DATE               PIC X(8) VALUE \"20261001\".\n       01  WS-FORMATTED-DATE          PIC X(10).\n       01  WS-DATE-RESULT             PIC XX.\n       01  WS-SUMMARY.\n           05 WS-ACCOUNT-COUNT       PIC 9(6) VALUE ZERO.\n           05 WS-ACTIVE-COUNT        PIC 9(6) VALUE ZERO.\n           05 WS-HOLD-COUNT          PIC 9(6) VALUE ZERO.\n           05 WS-TOTAL-BALANCE       PIC S9(11)V99 VALUE ZERO.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 5,
+        "score": 0.07811528444290161
+      }
+    ],
+    "q018": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.17494428157806396
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.16930127143859863
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.15667003393173218
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.15564018487930298
+      },
+      {
+        "chunk_id": "8c40ca8b83cd23fcc4c2b240c76a884c305d90c3975dfb79c653d6c0e877575a",
+        "text": "       MAIN-PROCESS.\n           PERFORM FORMAT-REPORT-DATE\n           OPEN INPUT ACCOUNT-IN OUTPUT REPORT-OUT\n           PERFORM READ-AND-SUMMARIZE UNTIL END-OF-ACCOUNTS\n           PERFORM WRITE-SUMMARY\n           CLOSE ACCOUNT-IN REPORT-OUT\n           GOBACK.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 7,
+        "score": 0.15399301052093506
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.15043258666992188
+      },
+      {
+        "chunk_id": "904bb704c2ff72ef3929e7336d995f193dcca3e8ef50990d840b8747ae0df3b2",
+        "text": "       PROCEDURE DIVISION.\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 6,
+        "score": 0.13584917783737183
+      },
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.12119323015213013
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.11787652969360352
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.117428719997406
+      }
+    ],
+    "q019": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.15180611610412598
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.150543212890625
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.1445002555847168
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.14297574758529663
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.13937890529632568
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.12983375787734985
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.11819112300872803
+      },
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.1173294186592102
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.11327487230300903
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.10992515087127686
+      }
+    ],
+    "q020": [
+      {
+        "chunk_id": "904bb704c2ff72ef3929e7336d995f193dcca3e8ef50990d840b8747ae0df3b2",
+        "text": "       PROCEDURE DIVISION.\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 6,
+        "score": 0.21697020530700684
+      },
+      {
+        "chunk_id": "2497d5f4f70ee2cf5231d46aa41fea917959178b1b79f282271882dde2461f22",
+        "text": "       INPUT-OUTPUT SECTION.\n       FILE-CONTROL.\n           SELECT CUSTOMER-IN ASSIGN TO \"customers.dat\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n           SELECT CUSTOMER-OUT ASSIGN TO \"customers.valid\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n           SELECT CUSTOMER-ERROR ASSIGN TO \"customers.error\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "INPUT-OUTPUT SECTION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 2,
+        "score": 0.21351969242095947
+      },
+      {
+        "chunk_id": "44b21d6ec6f054243998f52e116ae4d33a08aa88f0721680d33dd086df5d9791",
+        "text": "       DATA DIVISION.\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "DATA DIVISION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 3,
+        "score": 0.19072818756103516
+      },
+      {
+        "chunk_id": "a4e19b6b1b0db25b98b3ef5809d094739710f6f029dbacb74e30fff894638178",
+        "text": "       PROCEDURE DIVISION.\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 6,
+        "score": 0.1885995864868164
+      },
+      {
+        "chunk_id": "c1d8ecdee3c78b96b61dc6d4b5ed9cde548d99ccfa1025f99417718039d0e5a9",
+        "text": "       PROCEDURE DIVISION.\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 6,
+        "score": 0.1854550838470459
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.18272149562835693
+      },
+      {
+        "chunk_id": "0ed8546932d35897f53632e11858826893e4c5be4e31e0e29212471e8290cd4a",
+        "text": "       INPUT-OUTPUT SECTION.\n       FILE-CONTROL.\n           SELECT ACCOUNT-IN ASSIGN TO \"accounts.dat\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n           SELECT REPORT-OUT ASSIGN TO \"daily-report.txt\"\n               ORGANIZATION IS LINE SEQUENTIAL.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "INPUT-OUTPUT SECTION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 2,
+        "score": 0.17732638120651245
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.17453575134277344
+      },
+      {
+        "chunk_id": "12b59b5515842a95a2d9313e7606efe5ab862b5230f78ec0d6ef279a0a68ea11",
+        "text": "       DATA DIVISION.\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "DATA DIVISION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 3,
+        "score": 0.16690349578857422
+      },
+      {
+        "chunk_id": "fe3d66f0dbed03acee8971f433313a5d0da9431353824025a93ed9703443f007",
+        "text": "       DATA DIVISION.\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "DATA DIVISION",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 3,
+        "score": 0.16369527578353882
+      }
+    ],
+    "q021": [
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.20902365446090698
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.16803646087646484
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.1659914255142212
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.15688174962997437
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.1539928913116455
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.1505712866783142
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.1487087607383728
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.14548194408416748
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.12216943502426147
+      },
+      {
+        "chunk_id": "e6a8ef642dfa5c36a83fe4a387d8c323dfb68bcd65dd96a2f79dc0dc02480bd6",
+        "text": "       FILE SECTION.\n       FD  TRANSACTION-IN.\n       01  TRANSACTION-INPUT-RECORD.\n           05 TI-ACCOUNT-ID         PIC 9(8).\n           05 TI-TYPE               PIC X.\n           05 TI-AMOUNT             PIC S9(7)V99.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "FILE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 4,
+        "score": 0.11540645360946655
+      }
+    ],
+    "q022": [
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.20357191562652588
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.2027442455291748
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.19512850046157837
+      },
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.18896514177322388
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.17937195301055908
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.1473439335823059
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.14693725109100342
+      },
+      {
+        "chunk_id": "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE           PIC X VALUE \"N\".\n           88 END-OF-TRANSACTIONS   VALUE \"Y\".\n       01  WS-TRANSACTION-COUNT     PIC 99 VALUE ZERO.\n       01  WS-INDEX                 PIC 99 VALUE ZERO.\n       01  WS-TRANSACTION-TABLE.\n           05 WS-TRANSACTION-ENTRY OCCURS 20 TIMES.\n              10 WS-ACCOUNT-ID      PIC 9(8).\n              10 WS-TYPE            PIC X.\n              10 WS-AMOUNT          PIC S9(7)V99.\n       01  WS-CALL-TRANSACTION.\n           05 WS-CALL-TYPE          PIC X.\n           05 WS-CALL-AMOUNT        PIC S9(7)V99.\n       01  WS-CALL-ACCOUNT.\n           05 WS-CALL-BALANCE       PIC S9(9)V99 VALUE ZERO.\n           05 WS-CALL-STATUS        PIC X VALUE \"A\".\n       01  WS-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 5,
+        "score": 0.13403362035751343
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.13251787424087524
+      },
+      {
+        "chunk_id": "e6a8ef642dfa5c36a83fe4a387d8c323dfb68bcd65dd96a2f79dc0dc02480bd6",
+        "text": "       FILE SECTION.\n       FD  TRANSACTION-IN.\n       01  TRANSACTION-INPUT-RECORD.\n           05 TI-ACCOUNT-ID         PIC 9(8).\n           05 TI-TYPE               PIC X.\n           05 TI-AMOUNT             PIC S9(7)V99.\n\n",
+        "source_path": "samples/transaction-post.cbl",
+        "language": "cobol",
+        "symbol": "FILE SECTION",
+        "content_hash": "309f16976d118e8377a5800d4892404b3d1aba4b802df944ad099cfa0ccc74c7",
+        "chunk_index": 4,
+        "score": 0.1266002655029297
+      }
+    ],
+    "q023": [
+      {
+        "chunk_id": "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+        "text": "       PROCEDURE DIVISION USING LK-TRANSACTION\n                                LK-ACCOUNT\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 4,
+        "score": 0.138560950756073
+      },
+      {
+        "chunk_id": "80b3a22da6889312b3e56f6995ddbd509c1c2aebe285c4af3264b94cddddcbdd",
+        "text": "       APPLY-TRANSACTION.\n           MOVE \"00\" TO LK-RESULT-CODE\n           EVALUATE LK-TRANSACTION-TYPE\n               WHEN \"D\"\n                   PERFORM APPLY-DEPOSIT\n               WHEN \"W\"\n                   PERFORM APPLY-WITHDRAWAL\n               WHEN OTHER\n                   MOVE \"01\" TO LK-RESULT-CODE\n           END-EVALUATE\n           GOBACK.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-TRANSACTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 5,
+        "score": 0.1223939061164856
+      },
+      {
+        "chunk_id": "ca97b8ef9fb4523ce849e1603bbb5fe8ec7fb67955ebea02777ddd04d50286ca",
+        "text": "       APPLY-WITHDRAWAL.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               SUBTRACT LK-TRANSACTION-AMOUNT\n                   FROM LK-ACCOUNT-BALANCE\n               PERFORM CHECK-OVERDRAFT\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-WITHDRAWAL",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 7,
+        "score": 0.11915785074234009
+      },
+      {
+        "chunk_id": "b1c98ee7069f9e04be3fb2894457fe4f6794625e1dc706161d91fef8a28f59e3",
+        "text": "       APPLY-DEPOSIT.\n           IF LK-TRANSACTION-AMOUNT <= ZERO\n               MOVE \"02\" TO LK-RESULT-CODE\n           ELSE\n               ADD LK-TRANSACTION-AMOUNT TO LK-ACCOUNT-BALANCE\n               IF LK-ACCOUNT-BALANCE > WS-MAX-BALANCE\n                   MOVE \"03\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "APPLY-DEPOSIT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 6,
+        "score": 0.11585414409637451
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.11509889364242554
+      },
+      {
+        "chunk_id": "10d90c3ed24cb8937b804c4bc4d80462c81632e97669da6042022040528c064a",
+        "text": "       MAIN-PROCESS.\n           PERFORM OPEN-FILES\n           PERFORM UNTIL END-OF-FILE\n               PERFORM READ-CUSTOMER\n               IF NOT END-OF-FILE\n                   PERFORM VALIDATE-CUSTOMER\n                   IF VALID-CUSTOMER\n                       PERFORM WRITE-VALID-CUSTOMER\n                   ELSE\n                       PERFORM WRITE-ERROR-CUSTOMER\n                   END-IF\n               END-IF\n           END-PERFORM\n           PERFORM CLOSE-FILES\n           GOBACK.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 7,
+        "score": 0.0900830626487732
+      },
+      {
+        "chunk_id": "34cdb3cd2038ce5a1f4d5c6ff70aabd63999e923e86a07a0815280b937c5c3a4",
+        "text": "       LINKAGE SECTION.\n       01  LK-TRANSACTION.\n           05 LK-TRANSACTION-TYPE   PIC X.\n           05 LK-TRANSACTION-AMOUNT PIC S9(7)V99.\n       01  LK-ACCOUNT.\n           05 LK-ACCOUNT-BALANCE    PIC S9(9)V99.\n           05 LK-ACCOUNT-STATUS     PIC X.\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 3,
+        "score": 0.08853399753570557
+      },
+      {
+        "chunk_id": "cfdb93c78bb2c0ad48e6e4640cc4bda302648c3209543edcdfa98f29788f5e1b",
+        "text": "       CHECK-OVERDRAFT.\n           IF LK-ACCOUNT-BALANCE < ZERO\n               MOVE \"H\" TO LK-ACCOUNT-STATUS\n               MOVE \"04\" TO LK-RESULT-CODE\n           ELSE\n               MOVE \"A\" TO LK-ACCOUNT-STATUS\n           END-IF.\n\n",
+        "source_path": "samples/account-balance.cbl",
+        "language": "cobol",
+        "symbol": "CHECK-OVERDRAFT",
+        "content_hash": "c79d66239aa3d9100963d2dd9a8311f1b7240566c9856eb2b85d199d9cfd0a94",
+        "chunk_index": 8,
+        "score": 0.0870552659034729
+      },
+      {
+        "chunk_id": "90391fef9607adde525b683e608d9ce353faab6b12aac25f8650b3c4b03ae1e0",
+        "text": "       VALIDATE-DATE.\n           MOVE \"00\" TO LK-RESULT-CODE\n           IF WS-MONTH < 1 OR WS-MONTH > 12\n               MOVE \"01\" TO LK-RESULT-CODE\n           ELSE\n               IF WS-DAY < 1 OR WS-DAY > 31\n                   MOVE \"02\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "VALIDATE-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 6,
+        "score": 0.08095788955688477
+      },
+      {
+        "chunk_id": "608664edd60ca0ca617327a1bd101b03ea2dc1e97b04118aa2b9a2ce5eab8c19",
+        "text": "       OPEN-FILES.\n           OPEN INPUT CUSTOMER-IN\n                OUTPUT CUSTOMER-OUT CUSTOMER-ERROR.\n\n",
+        "source_path": "samples/customer-import.cbl",
+        "language": "cobol",
+        "symbol": "OPEN-FILES",
+        "content_hash": "ab96e679a7235db1758437fdec27f8bae6a86fc5f7a04d90838c07423fdd4468",
+        "chunk_index": 8,
+        "score": 0.07765913009643555
+      }
+    ],
+    "q024": [
+      {
+        "chunk_id": "90391fef9607adde525b683e608d9ce353faab6b12aac25f8650b3c4b03ae1e0",
+        "text": "       VALIDATE-DATE.\n           MOVE \"00\" TO LK-RESULT-CODE\n           IF WS-MONTH < 1 OR WS-MONTH > 12\n               MOVE \"01\" TO LK-RESULT-CODE\n           ELSE\n               IF WS-DAY < 1 OR WS-DAY > 31\n                   MOVE \"02\" TO LK-RESULT-CODE\n               END-IF\n           END-IF.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "VALIDATE-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 6,
+        "score": 0.47182250022888184
+      },
+      {
+        "chunk_id": "c59c4c107fe3f8f9395225b454d7ef0166459c81c87e3c5d54e1bccb1a4bde9e",
+        "text": "       FORMAT-DATE.\n           MOVE LK-INPUT-DATE(1:4) TO WS-YEAR\n           MOVE LK-INPUT-DATE(5:2) TO WS-MONTH\n           MOVE LK-INPUT-DATE(7:2) TO WS-DAY\n           PERFORM VALIDATE-DATE\n           IF LK-RESULT-CODE = \"00\"\n               STRING WS-YEAR \"-\" WS-MONTH \"-\" WS-DAY\n                   DELIMITED BY SIZE INTO LK-FORMATTED-DATE\n               END-STRING\n           ELSE\n               MOVE SPACES TO LK-FORMATTED-DATE\n           END-IF\n           GOBACK.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "FORMAT-DATE",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 5,
+        "score": 0.46657323837280273
+      },
+      {
+        "chunk_id": "2092f3a604a8e78d5743ea37f3d7ec036bcf91de2814a6831438943aed07330f",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-DATE-PARTS.\n           05 WS-YEAR               PIC 9(4).\n           05 WS-MONTH              PIC 99.\n           05 WS-DAY                PIC 99.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 2,
+        "score": 0.4618476629257202
+      },
+      {
+        "chunk_id": "8f45d26a77bd70cfa7885d5f2ce4ce385018826128975d0713e779dfddc4f4bc",
+        "text": "       LINKAGE SECTION.\n       01  LK-INPUT-DATE            PIC X(8).\n       01  LK-FORMATTED-DATE        PIC X(10).\n       01  LK-RESULT-CODE           PIC XX.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "LINKAGE SECTION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 3,
+        "score": 0.45986270904541016
+      },
+      {
+        "chunk_id": "79bcab724847d66bc2c6de44b4b94abdaedad1223b2f78594b0a86eaf1bedd6f",
+        "text": "       IDENTIFICATION DIVISION.\n       PROGRAM-ID. DATE-UTILITY.\n\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "IDENTIFICATION DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 0,
+        "score": 0.44878333806991577
+      },
+      {
+        "chunk_id": "f178450a833ff17af176c6b75e615688d504681294a472302d5f831c4454df13",
+        "text": "       PROCEDURE DIVISION USING LK-INPUT-DATE\n                                LK-FORMATTED-DATE\n                                LK-RESULT-CODE.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "PROCEDURE DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 4,
+        "score": 0.44849228858947754
+      },
+      {
+        "chunk_id": "08a32e276c31370a3e8e378319462a6e7a71dbf1cfc9a340b315ede1980bc1c0",
+        "text": "       DATA DIVISION.\n",
+        "source_path": "samples/date-utility.cbl",
+        "language": "cobol",
+        "symbol": "DATA DIVISION",
+        "content_hash": "d4f1f8ae2e9c2eaf1969d6374020868e54fef9b194a6976da0f72ee8efa8e105",
+        "chunk_index": 1,
+        "score": 0.4353627562522888
+      },
+      {
+        "chunk_id": "e93ef24ce24c6650d617f05c2e0eda28c992727c04a4eb6ce349d6118ee2f68e",
+        "text": "       FORMAT-REPORT-DATE.\n           CALL \"DATE-UTILITY\" USING WS-RUN-DATE\n                                     WS-FORMATTED-DATE\n                                     WS-DATE-RESULT.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "FORMAT-REPORT-DATE",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 8,
+        "score": 0.3938016891479492
+      },
+      {
+        "chunk_id": "8c40ca8b83cd23fcc4c2b240c76a884c305d90c3975dfb79c653d6c0e877575a",
+        "text": "       MAIN-PROCESS.\n           PERFORM FORMAT-REPORT-DATE\n           OPEN INPUT ACCOUNT-IN OUTPUT REPORT-OUT\n           PERFORM READ-AND-SUMMARIZE UNTIL END-OF-ACCOUNTS\n           PERFORM WRITE-SUMMARY\n           CLOSE ACCOUNT-IN REPORT-OUT\n           GOBACK.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "MAIN-PROCESS",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 7,
+        "score": 0.26462531089782715
+      },
+      {
+        "chunk_id": "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+        "text": "       WORKING-STORAGE SECTION.\n       01  WS-END-OF-FILE            PIC X VALUE \"N\".\n           88 END-OF-ACCOUNTS        VALUE \"Y\".\n       01  WS-RUN-DATE               PIC X(8) VALUE \"20261001\".\n       01  WS-FORMATTED-DATE          PIC X(10).\n       01  WS-DATE-RESULT             PIC XX.\n       01  WS-SUMMARY.\n           05 WS-ACCOUNT-COUNT       PIC 9(6) VALUE ZERO.\n           05 WS-ACTIVE-COUNT        PIC 9(6) VALUE ZERO.\n           05 WS-HOLD-COUNT          PIC 9(6) VALUE ZERO.\n           05 WS-TOTAL-BALANCE       PIC S9(11)V99 VALUE ZERO.\n\n",
+        "source_path": "samples/daily-report.cbl",
+        "language": "cobol",
+        "symbol": "WORKING-STORAGE SECTION",
+        "content_hash": "f251a2315401119ad74ba4f3d898977cc883a18056baf358ab61997b9e4daaab",
+        "chunk_index": 5,
+        "score": 0.2568928003311157
+      }
+    ]
+  }
+}

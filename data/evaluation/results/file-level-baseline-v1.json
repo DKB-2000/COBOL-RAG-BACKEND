@@ -1,0 +1,406 @@
+{
+  "configuration": {
+    "chroma_version": "1.5.9",
+    "embedding_function": "default",
+    "model": "all-MiniLM-L6-v2",
+    "distance": "cosine",
+    "chunking": "file-level",
+    "k": 5,
+    "data_root": "D:\\BackEnd_Project\\legacy-rag-backend\\data",
+    "dataset_path": "D:\\BackEnd_Project\\legacy-rag-backend\\data\\evaluation\\questions-v1.jsonl",
+    "chroma_path": "D:\\BackEnd_Project\\legacy-rag-backend\\data\\chroma\\baseline-v1"
+  },
+  "report": {
+    "evaluated_cases": 24,
+    "hit_at_k": 1.0,
+    "mrr": 0.49791666666666656,
+    "case_results": [
+      {
+        "case_id": "q001",
+        "question": "고객 입력 파일을 여는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q002",
+        "question": "고객 입력의 파일 끝을 감지하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q003",
+        "question": "고객 레코드의 ID, 이름, 상태를 검사하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/transaction-post.cbl",
+          "samples/account-balance.cbl",
+          "samples/customer-import.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q004",
+        "question": "유효하지 않은 고객 레코드는 어느 문단에서 오류 파일에 기록되는가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q005",
+        "question": "고객 가져오기 프로그램의 반복 처리를 시작하는 최상위 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/customer-import.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q006",
+        "question": "입금과 출금을 구분하는 문단과 구문은 무엇인가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl",
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q007",
+        "question": "0 이하의 입금액은 어떤 결과 코드로 거절되는가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q008",
+        "question": "출금 후 잔액이 음수이면 계정 상태는 어떻게 변경되는가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q009",
+        "question": "ACCOUNT-BALANCE가 호출자에게 돌려주는 세 개의 LINKAGE 항목은 무엇인가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q010",
+        "question": "최대 잔액 초과 여부는 어느 문단에서 검사되는가?",
+        "expected_sources": [
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q011",
+        "question": "거래 파일의 레코드를 메모리 테이블에 적재하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q012",
+        "question": "거래 메모리 테이블은 최대 몇 건을 보관하도록 정의되어 있는가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q013",
+        "question": "적재된 거래를 순회할 때 사용하는 인덱스는 무엇인가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q014",
+        "question": "TRANSACTION-POST가 잔액 계산을 위해 호출하는 프로그램은 무엇인가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl",
+          "samples/account-balance.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      {
+        "case_id": "q015",
+        "question": "잔액 처리 결과 코드 04는 어느 문단에서 계정 보류 메시지로 처리되는가?",
+        "expected_sources": [
+          "samples/transaction-post.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q016",
+        "question": "일일 보고서 날짜를 포맷하기 위해 호출하는 프로그램은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q017",
+        "question": "계정 수와 총잔액을 누적하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q018",
+        "question": "활성 계정과 보류 계정은 어떤 필드를 기준으로 나뉘는가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/transaction-post.cbl",
+          "samples/date-utility.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.25
+      },
+      {
+        "case_id": "q019",
+        "question": "보고서 한 줄을 조립하고 출력하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.2
+      },
+      {
+        "case_id": "q020",
+        "question": "일일 보고서 프로그램이 읽는 입력 파일의 SELECT 이름은 무엇인가?",
+        "expected_sources": [
+          "samples/daily-report.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/customer-import.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      {
+        "case_id": "q021",
+        "question": "8자리 날짜를 연도, 월, 일로 분리하는 문단은 무엇인가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q022",
+        "question": "월 값의 유효 범위는 어느 문단에서 검사되는가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/daily-report.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q023",
+        "question": "날짜 검증이 성공했을 때 사용하는 결과 코드는 무엇인가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/account-balance.cbl",
+          "samples/date-utility.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl",
+          "samples/daily-report.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      {
+        "case_id": "q024",
+        "question": "DATE-UTILITY가 호출자에게 반환하는 포맷된 날짜 필드는 무엇인가?",
+        "expected_sources": [
+          "samples/date-utility.cbl"
+        ],
+        "retrieved_sources": [
+          "samples/date-utility.cbl",
+          "samples/account-balance.cbl",
+          "samples/daily-report.cbl",
+          "samples/transaction-post.cbl",
+          "samples/customer-import.cbl"
+        ],
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0
+      }
+    ]
+  }
+}

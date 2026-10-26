@@ -1,0 +1,84 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CUSTOMER-IMPORT.
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT CUSTOMER-IN ASSIGN TO "customers.dat"
+               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT CUSTOMER-OUT ASSIGN TO "customers.valid"
+               ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT CUSTOMER-ERROR ASSIGN TO "customers.error"
+               ORGANIZATION IS LINE SEQUENTIAL.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD  CUSTOMER-IN.
+       01  CUSTOMER-INPUT-RECORD.
+           05 CI-ID                 PIC 9(6).
+           05 CI-NAME               PIC X(30).
+           05 CI-STATUS             PIC X.
+       FD  CUSTOMER-OUT.
+       01  CUSTOMER-OUTPUT-RECORD   PIC X(37).
+       FD  CUSTOMER-ERROR.
+       01  CUSTOMER-ERROR-RECORD    PIC X(60).
+
+       WORKING-STORAGE SECTION.
+       01  WS-END-OF-FILE           PIC X VALUE "N".
+           88 END-OF-FILE           VALUE "Y".
+       01  WS-VALID-CUSTOMER        PIC X VALUE "N".
+           88 VALID-CUSTOMER        VALUE "Y".
+       01  WS-COUNTS.
+           05 WS-READ-COUNT         PIC 9(5) VALUE ZERO.
+           05 WS-VALID-COUNT        PIC 9(5) VALUE ZERO.
+           05 WS-ERROR-COUNT        PIC 9(5) VALUE ZERO.
+
+       PROCEDURE DIVISION.
+       MAIN-PROCESS.
+           PERFORM OPEN-FILES
+           PERFORM UNTIL END-OF-FILE
+               PERFORM READ-CUSTOMER
+               IF NOT END-OF-FILE
+                   PERFORM VALIDATE-CUSTOMER
+                   IF VALID-CUSTOMER
+                       PERFORM WRITE-VALID-CUSTOMER
+                   ELSE
+                       PERFORM WRITE-ERROR-CUSTOMER
+                   END-IF
+               END-IF
+           END-PERFORM
+           PERFORM CLOSE-FILES
+           GOBACK.
+
+       OPEN-FILES.
+           OPEN INPUT CUSTOMER-IN
+                OUTPUT CUSTOMER-OUT CUSTOMER-ERROR.
+
+       READ-CUSTOMER.
+           READ CUSTOMER-IN
+               AT END SET END-OF-FILE TO TRUE
+               NOT AT END ADD 1 TO WS-READ-COUNT
+           END-READ.
+
+       VALIDATE-CUSTOMER.
+           MOVE "N" TO WS-VALID-CUSTOMER
+           IF CI-ID IS NUMERIC
+              AND CI-ID NOT = ZERO
+              AND CI-NAME NOT = SPACES
+              AND (CI-STATUS = "A" OR CI-STATUS = "I")
+               SET VALID-CUSTOMER TO TRUE
+           END-IF.
+
+       WRITE-VALID-CUSTOMER.
+           MOVE CUSTOMER-INPUT-RECORD TO CUSTOMER-OUTPUT-RECORD
+           WRITE CUSTOMER-OUTPUT-RECORD
+           ADD 1 TO WS-VALID-COUNT.
+
+       WRITE-ERROR-CUSTOMER.
+           MOVE CUSTOMER-INPUT-RECORD TO CUSTOMER-ERROR-RECORD
+           WRITE CUSTOMER-ERROR-RECORD
+           ADD 1 TO WS-ERROR-COUNT.
+
+       CLOSE-FILES.
+           CLOSE CUSTOMER-IN CUSTOMER-OUT CUSTOMER-ERROR.
+

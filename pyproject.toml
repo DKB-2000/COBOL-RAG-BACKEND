@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "legacy-rag-backend"
+version = "0.1.0"
+description = "Evidence-backed RAG API for legacy source code"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "chromadb>=1.5,<2",
+  "fastapi>=0.142,<1",
+  "langchain>=1.4,<2",
+  "langchain-chroma>=1.1,<2",
+  "numpy>=1.26,<3",
+  "onnxruntime>=1.20,<2",
+  "pydantic-settings>=2,<3",
+  "tokenizers>=0.20,<1",
+  "uvicorn[standard]>=0.30,<1",
+]
+
+[project.optional-dependencies]
+evaluation = [
+  "huggingface-hub>=0.30,<2",
+]
+dev = [
+  "httpx>=0.27,<1",
+  "pytest>=8,<10",
+  "ruff>=0.9,<1",
+]
+
+[tool.fastapi]
+entrypoint = "legacy_rag.main:app"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
