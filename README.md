@@ -89,6 +89,7 @@ docs/             # 설계·실험·운영 기록
 - [식별자 표현 보완과 전후 비교](docs/identifier-aware-retrieval-v1.md)
 - [행 번호 COBOL 호환성과 회귀 검증](docs/numbered-cobol-chunking.md)
 - [후보 확대·로컬 재순위화 실험](docs/retrieval-candidates.md): 근거 확보16/24→22/24, 기존 성공 회귀0. CPU 재순위화 p50 28.27초로 기본 적용 보류. 실제 답변 정확도와 구분합니다.
+- [재순위화 CPU 최적화](docs/reranker-speed.md): INT8·길이별 배치로 근거22/24를 유지하며 관측 p50 12.64초로 감소. 여전히 기본 API에는 적용하지 않았습니다.
 - 이전 실험: [구조 청킹](docs/structured-chunking-baseline.md) · [문맥화](docs/contextual-embedding-baseline.md) · [다국어 모델](docs/multilingual-embedding-baseline.md) · [관계 확장](docs/context-expansion-baseline.md) · [창 평균](docs/windowed-embedding-baseline.md)
 
 ## 빠른 시작 — 로컬 검색 데모
