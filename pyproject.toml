@@ -21,6 +21,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+openai = [
+  "openai>=2,<3",
+]
 evaluation = [
   "huggingface-hub>=0.30,<2",
 ]

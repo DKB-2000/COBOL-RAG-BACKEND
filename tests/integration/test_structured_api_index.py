@@ -75,7 +75,8 @@ def test_embedding_failure_does_not_replace_existing_index(tmp_path):
 
 def test_default_dependencies_use_local_model_and_isolated_collection(monkeypatch):
     settings = dependencies.ApiSettings()
-    assert settings.chroma_path.name == "api-v2-multilingual"
+    assert settings.chroma_path.name == "api-v3-identifier-aware"
+    assert settings.retrieval_profile == "identifier-aware"
     assert settings.model_dir.name == "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
     captured = {}
 
@@ -88,7 +89,7 @@ def test_default_dependencies_use_local_model_and_isolated_collection(monkeypatc
     dependencies.get_chunk_store.cache_clear()
     try:
         dependencies.get_chunk_store()
-        assert captured["name"] == "legacy-rag-api-v2-multilingual"
+        assert captured["name"] == "legacy-rag-api-v3-identifier-aware"
         assert captured["embedding_function"] is None
         assert captured["configuration"] == {"hnsw": {"space": "cosine"}}
     finally:
@@ -99,10 +100,35 @@ def test_api_embedding_dependency_uses_only_configured_local_files(monkeypatch):
     model_dir = Path("local-model")
     monkeypatch.setenv("LEGACY_RAG_MODEL_DIR", str(model_dir))
     captured = []
-    monkeypatch.setattr(dependencies, "MultilingualOnnxEmbedding", lambda path: captured.append(path))
+    monkeypatch.setattr(dependencies, "IdentifierAwareOnnxEmbedding", lambda path: captured.append(path))
     dependencies.get_embedding_function.cache_clear()
     try:
         dependencies.get_embedding_function()
         assert captured == [model_dir.resolve()]
     finally:
+        dependencies.get_embedding_function.cache_clear()
+
+
+def test_original_profile_keeps_old_encoder_and_collection(monkeypatch):
+    monkeypatch.setenv("LEGACY_RAG_RETRIEVAL_PROFILE", "original")
+    monkeypatch.setenv("LEGACY_RAG_GENERATION_PROVIDER", "openai")
+    captured = {}
+
+    class Client:
+        def get_or_create_collection(self, **kwargs):
+            captured.update(kwargs)
+            return object()
+
+    monkeypatch.setattr(dependencies.chromadb, "PersistentClient", lambda **kwargs: Client())
+    paths = []
+    monkeypatch.setattr(dependencies, "MultilingualOnnxEmbedding", lambda path: paths.append(path))
+    dependencies.get_chunk_store.cache_clear()
+    dependencies.get_embedding_function.cache_clear()
+    try:
+        dependencies.get_chunk_store()
+        dependencies.get_embedding_function()
+        assert captured["name"] == "legacy-rag-openai-public-v1"
+        assert len(paths) == 1
+    finally:
+        dependencies.get_chunk_store.cache_clear()
         dependencies.get_embedding_function.cache_clear()

@@ -1,0 +1,30 @@
+{"case_id":"q001","required_points":["CUSTOMER-IMPORT의 OPEN-FILES 문단","OPEN INPUT CUSTOMER-IN이 고객 입력 파일을 연다"]}
+{"case_id":"q002","required_points":["READ-CUSTOMER 문단","READ CUSTOMER-IN의 AT END에서 END-OF-FILE을 TRUE로 설정"]}
+{"case_id":"q003","required_points":["VALIDATE-CUSTOMER 문단","ID가 숫자이며0이 아님, 이름이 공백이 아님, 상태가 A 또는 I라는 검사를 근거로 식별"]}
+{"case_id":"q004","required_points":["MAIN-PROCESS의 무효 분기가 WRITE-ERROR-CUSTOMER를 호출","WRITE-ERROR-CUSTOMER에서 입력을 오류 레코드로 옮기고 WRITE","CUSTOMER-ERROR가 오류 출력 파일"]}
+{"case_id":"q005","required_points":["CUSTOMER-IMPORT의 MAIN-PROCESS","PERFORM UNTIL END-OF-FILE에서 READ-CUSTOMER와 후속 처리를 반복"]}
+{"case_id":"q006","required_points":["APPLY-TRANSACTION 문단","EVALUATE LK-TRANSACTION-TYPE","D는 APPLY-DEPOSIT, W는 APPLY-WITHDRAWAL"]}
+{"case_id":"q007","required_points":["APPLY-DEPOSIT에서 금액이 ZERO 이하인 조건","LK-RESULT-CODE에02를 설정"]}
+{"case_id":"q008","required_points":["출금 후 CHECK-OVERDRAFT 검사","LK-ACCOUNT-BALANCE가 음수이면 LK-ACCOUNT-STATUS를 H로 설정","차감의 사전 차단 또는 자동 복구를 지어내지 않음"]}
+{"case_id":"q009","required_points":["LK-TRANSACTION, LK-ACCOUNT, LK-RESULT-CODE 세 항목","LINKAGE 선언과 PROCEDURE DIVISION USING으로 전달","RETURNING 값3개나 값 복사 반환으로 오해하지 않음"]}
+{"case_id":"q010","required_points":["APPLY-DEPOSIT 문단","가산 후 LK-ACCOUNT-BALANCE와 WS-MAX-BALANCE 비교","초과 시03 설정이며 가산 롤백을 지어내지 않음"]}
+{"case_id":"q011","required_points":["LOAD-TRANSACTIONS 문단","READ TRANSACTION-IN","계좌ID·유형·금액을 WS-TRANSACTION-TABLE의 현재 건수 위치로 이동"]}
+{"case_id":"q012","required_points":["WS-TRANSACTION-ENTRY OCCURS 20 TIMES","메모리 테이블 최대20건"]}
+{"case_id":"q013","required_points":["MAIN-PROCESS에서 POST-TRANSACTIONS를 PERFORM VARYING","WS-INDEX를1부터1씩 늘려 WS-TRANSACTION-COUNT까지 순회"]}
+{"case_id":"q014","required_points":["호출 대상 ACCOUNT-BALANCE","TRANSACTION-POST의 POST-TRANSACTIONS 실제 CALL 구문","대상의 PROGRAM-ID만으로 호출 관계를 증명했다고 간주하지 않음"]}
+{"case_id":"q015","required_points":["HANDLE-POST-RESULT 문단","EVALUATE WS-RESULT-CODE의04 분기","ACCOUNT ON HOLD 메시지와 계좌ID 표시"]}
+{"case_id":"q016","required_points":["호출 대상 DATE-UTILITY","DAILY-REPORT의 FORMAT-REPORT-DATE 실제 CALL 구문","대상의 선언만 인용해 호출을 증명했다고 간주하지 않음"]}
+{"case_id":"q017","required_points":["READ-AND-SUMMARIZE 문단","NOT AT END에서 계정 수 증가와 AR-BALANCE 누적"]}
+{"case_id":"q018","required_points":["AR-STATUS 기준","A이면 활성 수 증가, 나머지는 보류 수 증가","H만 보류로 센다고 범위를 좁히지 않음"]}
+{"case_id":"q019","required_points":["WRITE-SUMMARY 문단","STRING으로 REPORT-OUTPUT-RECORD 조립 후 WRITE"]}
+{"case_id":"q020","required_points":["SELECT 이름 ACCOUNT-IN","accounts.dat는 연결 파일명이며 SELECT 이름과 구분"]}
+{"case_id":"q021","required_points":["FORMAT-DATE 문단","LK-INPUT-DATE의1:4,5:2,7:2를 연도·월·일로 이동","WS-DATE-PARTS 아래 필드로 분리"]}
+{"case_id":"q022","required_points":["VALIDATE-DATE 문단","WS-MONTH가1보다 작거나12보다 큰지 검사"]}
+{"case_id":"q023","required_points":["성공 결과00","VALIDATE-DATE에서00 초기화 후 월/일 범위 오류 시 비정상 코드로 변경","달별 일수·윤년 검증을 지어내지 않음"]}
+{"case_id":"q024","required_points":["LK-FORMATTED-DATE","PIC X(10) LINKAGE 필드이며 PROCEDURE DIVISION USING으로 전달"]}
+{"case_id":"q025","required_points":["공개5개 문맥에 DB2 SQL 근거가 없어 답변을 거절","갱신 SQL을 지어내지 않음"]}
+{"case_id":"q026","required_points":["공개5개 문맥에 CICS 화면 맵 전송 근거가 없어 거절","프로그램명을 추측하지 않음"]}
+{"case_id":"q027","required_points":["공개5개 문맥에 IBM MQ 큐 이름의 근거가 없어 거절","큐 이름을 지어내지 않음"]}
+{"case_id":"q028","required_points":["공개5개 문맥에 암호화 비밀번호 근거가 없어 거절","비밀번호를 추측하거나 생성하지 않음"]}
+{"case_id":"q029","required_points":["공개5개 문맥에 월말 계정 삭제 기능의 근거가 없어 거절","고객 유효성 검사·파일 닫기를 삭제 기능이라고 설명하지 않음"]}
+{"case_id":"q030","required_points":["공개5개 문맥에 XML 송장 생성 근거가 없어 거절","일일 텍스트 보고서를 XML 송장이라고 오인하지 않음"]}

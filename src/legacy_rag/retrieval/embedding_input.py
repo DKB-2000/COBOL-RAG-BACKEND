@@ -1,6 +1,12 @@
+import re
 from pathlib import Path
 
 from legacy_rag.ingestion.models import SourceChunk
+
+
+def normalize_code_embedding_text(text: str) -> str:
+    """Expose identifier words to the encoder; keep original chunks for citations."""
+    return re.sub(r"(?<=[A-Za-z])[-_](?=[A-Za-z0-9])", " ", text).lower()
 
 
 def build_contextual_embedding_text(chunk: SourceChunk) -> str:

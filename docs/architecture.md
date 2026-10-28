@@ -46,12 +46,26 @@
 
 ## P4 계약 구현 상태
 
-현재 API는 일반 다국어 구조·문맥화 검색을 별도 api-v2 collection에서 사용한다. `/query`는 검색된 원문 최대10개/4000자 문맥을 조립하고 `GenerationModel` port의 주장별 출처를 검증한다. 생성 공급자는 아직 미연결이며 기본 응답은 `unavailable`이다. 가짜 모델 검증은 실제 답변 품질을 보장하지 않는다. 상세 계약·검증·한계는 [`grounded-query-contract.md`](grounded-query-contract.md)를 따른다.
+기본 검색은 다국어 구조·문맥화 입력의 원래 표현과 식별자 정규화 표현을 결합하는 identifier-aware 프로필과 api-v3 collection을 사용한다. original 프로필은 별도 collection으로 유지한다. `/query`는 원문 최대10개/4000자 문맥을 조립하고 주장별 출처를 검증한다. OpenAI는 기본 비활성화다. [실제 생성 전후 평가](generation-evaluation-v2.md)의 인용 충족13→15/24와 [무료 검색 검증](identifier-aware-retrieval-v1.md)의 근거 포함13→16/24를 구분한다. 실제 생성 회귀1건과 독립 사람 검수 미완료를 공개한다.
+
+OpenAI 모드에서는 프로필에 맞는 별도 공개 collection과 공개 합성5개만 사용한다. 색인은 파일 경로·원문 해시를 검증하고, 생성 직전에는 승인된 청크의 ID·본문·메타데이터를 대조한다. 로컬 전용 COBOL은 외부 생성 문맥에서 제외한다. 일반 DLP나 질문 본문의 민감정보 탐지는 아니다. 설정은 [`openai-generation.md`](openai-generation.md), 기존 계약·검색 기록은 [`grounded-query-contract.md`](grounded-query-contract.md)를 따른다.
 
 ## 평가 게이트
+
+행 번호 입력은 경계 판별 때만 번호/식별 영역을 처리하고 원문 slice를 보존한다.
+지원 범위·공개 합성 사례와 기존52청크/30문항 회귀는
+[번호 COBOL 청킹 기록](numbered-cobol-chunking.md)을 따른다.
 
 - 검색: Hit@k, MRR, 필터 정확도
 - 답변: 근거성, 인용 완전성, 답변 불가 질문의 거절 정확도
 - 운영: 색인 시간, p50/p95 질의 지연시간, 저장 크기
 
 청킹, 임베딩, 검색 파라미터 변경은 같은 평가셋의 기준선과 비교하며, 평균뿐 아니라 실패 사례도 보존한다.
+
+## 기본 운영
+
+`/health`는 liveness, `/ready`는 실제 로컬 검색과 비어 있지 않은 색인을 검사한다.
+준비 검사는 외부 생성 공급자를 호출하지 않는다. 앱 미들웨어는 요청 ID를 생성하고 허용된
+요청 완료 메타데이터만 기록한다. 초기화/검색 오류는 안전한503, 입력 오류는 고정400/422로
+반환하며 기존 생성 unavailable 계약은 유지한다. 상세한 실행·동시 색인 제한·실제 검증과
+미완료 구분은 [runtime.md](runtime.md)를 따른다.

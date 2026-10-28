@@ -52,7 +52,7 @@ def test_index_documents_returns_bad_request_for_invalid_source() -> None:
     )
 
     assert response.status_code == 400
-    assert response.json() == {"detail": "source path is outside data root"}
+    assert response.json() == {"detail": "invalid_source"}
 
 
 def test_index_documents_rejects_empty_source_paths() -> None:

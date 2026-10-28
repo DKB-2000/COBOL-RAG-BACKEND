@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel, Field, StringConstraints
 
 from legacy_rag.api.dependencies import get_query_service
@@ -11,7 +11,7 @@ router = APIRouter(tags=["query"])
 
 
 class QueryRequest(BaseModel):
-    query: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
+    query: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=4000)]
     limit: int = Field(default=10, ge=1, le=10)
 
 
@@ -36,8 +36,10 @@ class QueryResponse(BaseModel):
 def query(
     request: QueryRequest,
     service: Annotated[GroundedQueryService, Depends(get_query_service)],
+    http_request: Request,
 ) -> QueryResponse:
     result = service.query(query=request.query, limit=request.limit)
+    http_request.state.query_status = result.status
     return QueryResponse(
         status=result.status,
         answer=result.answer,

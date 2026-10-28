@@ -1,0 +1,14 @@
+# Allow only application build inputs; raw code, vectors, models and secrets stay outside context.
+**
+!Dockerfile
+!pyproject.toml
+!README.md
+!logging.json
+!src/
+!src/**
+**/__pycache__/
+**/*.py[cod]
+**/.env
+**/.env.*
+**/*.key
+**/*.pem

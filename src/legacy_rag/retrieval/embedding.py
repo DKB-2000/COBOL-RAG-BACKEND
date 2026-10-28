@@ -5,6 +5,8 @@ import numpy as np
 import onnxruntime as ort
 from tokenizers import Encoding, Tokenizer
 
+from legacy_rag.retrieval.embedding_input import normalize_code_embedding_text
+
 MODEL_ID = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 MODEL_REVISION = "e8f8c211226b894fcb81acc59f3b34ba3efd5f42"
 MODEL_FILES = (
@@ -78,3 +80,19 @@ class MultilingualOnnxEmbedding:
         feed = {item.name: inputs[item.name] for item in self.session.get_inputs()}
         tokens = self.session.run(["last_hidden_state"], feed)[0]
         return masked_mean_pool(tokens, inputs["attention_mask"])
+
+
+class IdentifierAwareOnnxEmbedding(MultilingualOnnxEmbedding):
+    """Keep original meaning and add normalized identifier words at equal weight."""
+
+    def __call__(self, texts: list[str]) -> list[list[float]]:
+        if not texts:
+            return []
+        original = super().__call__(texts)
+        normalized_texts = [normalize_code_embedding_text(text) for text in texts]
+        if normalized_texts == texts:
+            return original
+        normalized = super().__call__(normalized_texts)
+        pooled = (np.asarray(original) + np.asarray(normalized)) / 2
+        pooled /= np.maximum(np.linalg.norm(pooled, axis=1, keepdims=True), 1e-12)
+        return pooled.tolist()

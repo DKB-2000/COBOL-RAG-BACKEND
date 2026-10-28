@@ -1,0 +1,9 @@
+# Optional runtime-only key forwarding. Never render this configuration with a real key to stdout.
+services:
+  api:
+    environment:
+      LEGACY_RAG_GENERATION_PROVIDER: openai
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?Set OPENAI_API_KEY in the current terminal}
+      LEGACY_RAG_OPENAI_MODEL: gpt-6-luna
+      LEGACY_RAG_OPENAI_TIMEOUT_SECONDS: "30"
+      LEGACY_RAG_OPENAI_MAX_OUTPUT_TOKENS: "1000"

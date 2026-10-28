@@ -45,9 +45,13 @@ def chunk_cobol_structure(document: SourceDocument) -> list[SourceChunk]:
     in_procedure_division = False
 
     for line in document.text.splitlines(keepends=True):
-        division_match = _DIVISION_PATTERN.match(line)
-        section_match = _SECTION_PATTERN.match(line)
-        paragraph_match = _PARAGRAPH_PATTERN.match(line)
+        boundary_line = line
+        if re.match(r"^[ 0-9]{6} ", line):
+            # Inspect fixed-format code only; offsets and source slices stay unchanged.
+            boundary_line = "       " + line[7:72]
+        division_match = _DIVISION_PATTERN.match(boundary_line)
+        section_match = _SECTION_PATTERN.match(boundary_line)
+        paragraph_match = _PARAGRAPH_PATTERN.match(boundary_line)
 
         if division_match is not None:
             division_name = division_match.group(1).upper()

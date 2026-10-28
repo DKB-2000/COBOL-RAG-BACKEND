@@ -1,0 +1,313 @@
+{
+  "schema_version": "runtime-verification-v2",
+  "created_at_utc": "2026-10-27T06:28:44.961906+00:00",
+  "scope": "Linux Docker Desktop amd64; public synthetic samples; separate named volume",
+  "generation_calls": 0,
+  "key_forwarded": false,
+  "baseline": "runtime-verification-v1.json",
+  "baseline_sha256": "f195dc8ee0eade59fd417eaa3bb6d086563f63c90e512121dae5d87af00e31eb",
+  "engine": {
+    "version": "29.7.2",
+    "os": "linux",
+    "architecture": "x86_64",
+    "logical_cpus": 14,
+    "memory_bytes": 8185933824
+  },
+  "build": {
+    "passed": true,
+    "elapsed_seconds": 196.54557109996676,
+    "base_image": "python:3.11-slim-bookworm@sha256:90d117a7f1ef6535dc75831e1a9184725757fede0d4d424d7977fb5429d50610",
+    "image_id": "sha256:d60aa6edcf562d8a51c641fcb0c7ce382da9c02efad5e88b40d66037622cf788",
+    "image_size_bytes": 190811288,
+    "linux_package_snapshot": "data\\evaluation\\results\\runtime-linux-packages-v1.txt",
+    "linux_packages_sha256": "818206f0dac813aa88e8e25e934e47b9cd9e66e38d7e306df5925fb22f4fd3d0",
+    "lock_enforced_for_future_builds": false
+  },
+  "container_persistence_verified": true,
+  "metadata": {
+    "before": {
+      "container_id": "a8cdc563ec2bac37bd0699cc4e64bd60334a4b85bd4d500a6c80c0ca518abef7",
+      "image_id": "sha256:d60aa6edcf562d8a51c641fcb0c7ce382da9c02efad5e88b40d66037622cf788",
+      "user": "10001:10001",
+      "readonly_rootfs": true,
+      "generation_provider": "disabled",
+      "key_forwarded": false,
+      "mounts": [
+        {
+          "type": "bind",
+          "destination": "/app/data/samples",
+          "read_write": false,
+          "volume_name": null
+        },
+        {
+          "type": "bind",
+          "destination": "/models",
+          "read_write": false,
+          "volume_name": null
+        },
+        {
+          "type": "volume",
+          "destination": "/var/lib/legacy-rag/chroma",
+          "read_write": true,
+          "volume_name": "legacy-rag-runtime_runtime-chroma"
+        }
+      ],
+      "ports": {
+        "8000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "8001"
+          }
+        ]
+      },
+      "health": "healthy",
+      "command": [
+        "python",
+        "-m",
+        "uvicorn",
+        "legacy_rag.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-config",
+        "/app/logging.json"
+      ],
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "after": {
+      "container_id": "008c65685cfe725a088af63928f1517a773675bf121452c01367ea3576634f00",
+      "image_id": "sha256:d60aa6edcf562d8a51c641fcb0c7ce382da9c02efad5e88b40d66037622cf788",
+      "user": "10001:10001",
+      "readonly_rootfs": true,
+      "generation_provider": "disabled",
+      "key_forwarded": false,
+      "mounts": [
+        {
+          "type": "bind",
+          "destination": "/app/data/samples",
+          "read_write": false,
+          "volume_name": null
+        },
+        {
+          "type": "bind",
+          "destination": "/models",
+          "read_write": false,
+          "volume_name": null
+        },
+        {
+          "type": "volume",
+          "destination": "/var/lib/legacy-rag/chroma",
+          "read_write": true,
+          "volume_name": "legacy-rag-runtime_runtime-chroma"
+        }
+      ],
+      "ports": {
+        "8000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "8001"
+          }
+        ]
+      },
+      "health": "healthy",
+      "command": [
+        "python",
+        "-m",
+        "uvicorn",
+        "legacy_rag.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--workers",
+        "1",
+        "--no-access-log",
+        "--log-config",
+        "/app/logging.json"
+      ],
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ]
+    },
+    "linux": {
+      "platform": "Linux-6.6.87.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+      "python": "3.11.18",
+      "uid": 10001,
+      "gid": 10001,
+      "sqlite": "3.40.1",
+      "logical_cpus": 14,
+      "chroma_bytes": 917668
+    },
+    "engine": "\"29.7.2\" \"linux\" \"x86_64\" 14 8185933824",
+    "image_id": "sha256:d60aa6edcf562d8a51c641fcb0c7ce382da9c02efad5e88b40d66037622cf788",
+    "image_created": "2026-10-27T06:22:54.362401936Z",
+    "image_size_bytes": 190811288,
+    "redaction_checks": [
+      {
+        "http_status": 422,
+        "marker_excluded": true
+      },
+      {
+        "http_status": 404,
+        "marker_excluded": true
+      }
+    ],
+    "logs_marker_excluded": true,
+    "generation_calls": 0,
+    "left_running": "127.0.0.1:8001, generation disabled",
+    "limitation": "Top10 fingerprint persistence; no full backup/concurrency/paid generation validation"
+  },
+  "initial_index_seconds_including_initialization": 20.458577300189063,
+  "before_recreate": {
+    "created_at_utc": "2026-10-27T06:26:44.307392+00:00",
+    "base_url": "http://127.0.0.1:8001",
+    "generation_calls": 0,
+    "health_seconds": 0.007473799865692854,
+    "index_result": {
+      "indexed_documents": 5,
+      "indexed_chunks": 52
+    },
+    "index_seconds_including_initialization": 10.991847899975255,
+    "ready_seconds": 0.021829900098964572,
+    "warmup_search_seconds": 0.024274500086903572,
+    "search_fingerprint": "691bbc1f70505ba4e62438b0115cb03b69e6140951ed4b93957d94777c764848",
+    "retrieved_chunk_ids": [
+      "7c5f4cbbf2ae870170930ab7e2baec597af424568984bc5c602e840b0738e928",
+      "8c40ca8b83cd23fcc4c2b240c76a884c305d90c3975dfb79c653d6c0e877575a",
+      "c1d8ecdee3c78b96b61dc6d4b5ed9cde548d99ccfa1025f99417718039d0e5a9",
+      "2f54b3d20fd99d53859bbcdab730e0c2ca23e155e95ff30ad5e62e884b23dd28",
+      "904bb704c2ff72ef3929e7336d995f193dcca3e8ef50990d840b8747ae0df3b2",
+      "3891e798acaba2e59792b09089df8ce6474fc11a9659775b3b9161e7f9d5477d",
+      "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+      "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+      "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+      "d5651db6e93f498b461590f959930d410d69e8a3db62ac84816683da8304bf85"
+    ],
+    "warm_search_http_seconds": [
+      0.025819499976933002,
+      0.02089550020173192,
+      0.019680599914863706,
+      0.020060600014403462,
+      0.019817700143903494,
+      0.022132799960672855,
+      0.019406699808314443,
+      0.021307499846443534,
+      0.020598199917003512,
+      0.0200698000844568
+    ],
+    "n": 10,
+    "concurrency": 1,
+    "percentile_method": "nearest_rank",
+    "p50_seconds": 0.0200698000844568,
+    "p95_seconds": 0.025819499976933002,
+    "comparison_matches": null,
+    "measurement_scope": "warm sequential /search HTTP; initialization/readiness/warmup reported separately",
+    "limitations": "Small sample; no concurrency SLA or generation measurement; indexing is non-atomic"
+  },
+  "after_recreate_without_reindex": {
+    "created_at_utc": "2026-10-27T06:27:01.779424+00:00",
+    "base_url": "http://127.0.0.1:8001",
+    "generation_calls": 0,
+    "health_seconds": 0.007846899796277285,
+    "index_result": null,
+    "index_seconds_including_initialization": null,
+    "ready_seconds": 7.59045060002245,
+    "warmup_search_seconds": 0.02771169994957745,
+    "search_fingerprint": "691bbc1f70505ba4e62438b0115cb03b69e6140951ed4b93957d94777c764848",
+    "retrieved_chunk_ids": [
+      "7c5f4cbbf2ae870170930ab7e2baec597af424568984bc5c602e840b0738e928",
+      "8c40ca8b83cd23fcc4c2b240c76a884c305d90c3975dfb79c653d6c0e877575a",
+      "c1d8ecdee3c78b96b61dc6d4b5ed9cde548d99ccfa1025f99417718039d0e5a9",
+      "2f54b3d20fd99d53859bbcdab730e0c2ca23e155e95ff30ad5e62e884b23dd28",
+      "904bb704c2ff72ef3929e7336d995f193dcca3e8ef50990d840b8747ae0df3b2",
+      "3891e798acaba2e59792b09089df8ce6474fc11a9659775b3b9161e7f9d5477d",
+      "22c37c084357aac86a1266f0df172abaf53405dd785f1006a175e3ef0f0d65f3",
+      "2faba2838ace544efb662746d5452ddba3df51cff90c5158ee332880c355a4b2",
+      "55248ddca112f8b13254358e701f64915e500eafd36ffb1ab0d9750f2e47737c",
+      "d5651db6e93f498b461590f959930d410d69e8a3db62ac84816683da8304bf85"
+    ],
+    "warm_search_http_seconds": [
+      0.029845499899238348,
+      0.030477300053462386,
+      0.029946499969810247,
+      0.031218599993735552,
+      0.026951999869197607,
+      0.029707100009545684,
+      0.03700740006752312,
+      0.03608190012164414,
+      0.03919279994443059,
+      0.033018500078469515
+    ],
+    "n": 10,
+    "concurrency": 1,
+    "percentile_method": "nearest_rank",
+    "p50_seconds": 0.030477300053462386,
+    "p95_seconds": 0.03919279994443059,
+    "comparison_matches": true,
+    "measurement_scope": "warm sequential /search HTTP; initialization/readiness/warmup reported separately",
+    "limitations": "Small sample; no concurrency SLA or generation measurement; indexing is non-atomic"
+  },
+  "excluded_image_paths": {
+    "/app/.env": false,
+    "/app/.venv": false,
+    "/app/data/raw": false,
+    "/app/artifacts": false,
+    "/app/tasks": false,
+    "/app/.git": false
+  },
+  "verification_tool_correction": {
+    "initial_mount_array_comparison_failed": true,
+    "original_recreation_search_recovered_without_reindex": true,
+    "change": "Compare mount entries sorted by destination and save pre/post metadata immediately",
+    "production_code_changed": false
+  },
+  "windows_regression_tests": "186 passed in 11.77s",
+  "linux_validation": "Actual HTTP index/readiness/search, container recreation, metadata, 422/404 redaction and log checks; not a full Linux pytest run",
+  "file_hashes": {
+    "Dockerfile": "dc4bd1c1fd3d04c93ec97b45a6cf8536d92ccbc7339805d771715c3ad7500cd2",
+    ".dockerignore": "692420a88eb081db4f502a19339ba503254f1c1de9fb3605f00e3d0e79406806",
+    "compose.yaml": "05aae302d97b23a554c80169db06c3f6ac24bc744700b9b87db232c999ca720e",
+    "compose.openai.yaml": "e77220850f71f358b84e03f9adb1b5137b4afad139f4382e552bee67946a2a94",
+    "logging.json": "ad8603578d43fdb3ac96179052c61c7ec10da11c3aef635a28cbf803de1e86f3",
+    "pyproject.toml": "8d8cc5d7a25233f397426a8cd53d13cfb5b0389e6d87b7577efea8ca7248bb16",
+    "src/legacy_rag/main.py": "8b078aa6493a50a5271c7788b22976beb22a5b984081cc8650bd0c443669394c",
+    "src/legacy_rag/api/runtime.py": "15c8ba824ca365182ebb4e61379131d9fe60cc0b6a41a815049cb397ca259188",
+    "src/legacy_rag/api/dependencies.py": "e60191e3107bbf7307ac912c906c9178245a7af6b356dbcafe4cf9a598ce4034",
+    "src/legacy_rag/api/routes/health.py": "08d66f21d7a8c606fe1fb7c5a7c56d6305253fcf4f5a9ee553677a3c64c0cb3c",
+    "src/legacy_rag/api/routes/documents.py": "6a518059a10e61156288be3947150d66861164175ee7fc7eee346ee7e88059de",
+    "src/legacy_rag/api/routes/query.py": "e79272976691a3cbbd353988f71430d8b2f7c16c27ef2d3df4a24cbcc36f3fa4",
+    "scripts/verify_runtime.py": "b6281af0ddcfdb9c44eefe8501c8515bd8284c3b6095bc53e336b733744bd9d8"
+  },
+  "evidence_hashes": {
+    "after.json": "cc68d68562d0c72032129c4f05d5c8a236dc0f702052cd5afa21595bc6b79ad2",
+    "before.json": "a32066e5cf5656c0f6216a41cd0dbfeb301b51500fd21191fea0e47ad1ea8b09",
+    "container-after.json": "6884b47bcbee57dd3f306bc905d546cf863c1497b8b821e6343ac324021058ad",
+    "container-before.json": "bc22754154f72600d5570c3914e16defbaa2c1fe756cc83484a29da9190c1317",
+    "linux-packages.txt": "818206f0dac813aa88e8e25e934e47b9cd9e66e38d7e306df5925fb22f4fd3d0",
+    "logs-after.log": "0914b5859592e9c49474499a69d36a722aedf6be7c35617f9dbd88241a2a552f",
+    "logs-before.log": "9abd8d8bd73412c02439462d949932c026de6a3e3d0391792e30942d637f2538",
+    "metadata.json": "913c679095f944313b55ec5a9f05032e9739aa3676ca3cf8c3e3958e2e1a72e4",
+    "probe-after.log": "c4a7ed30a1469a16ef8414a2b9de0eb5597c3b33d932a4c4cbdfa68eee590baa",
+    "probe-before.log": "ca7bcb0a5950085cd1e9924d8acfa8592d6a13332831342c0081bb886cd4c6f3",
+    "recreate.log": "94077f2bb5a058725bba5869e485c63cff8a17c5207abac2be4704eca5ef14f5",
+    "up.log": "dd30a07880e1aca6cf79505d0e4344d51b8cee0372254fec52f78dc61176bfb3"
+  },
+  "limitations": [
+    "Sequential n10 single-question measurements are not a concurrency SLA",
+    "Top10 fingerprint persistence is not complete backup verification",
+    "No paid generation, auth/TLS/cloud validation",
+    "Package/image snapshot captured; future build resolution is not locked"
+  ]
+}

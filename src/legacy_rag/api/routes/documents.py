@@ -29,11 +29,11 @@ def index_documents(
             source_paths=request.source_paths,
             rebuild=request.rebuild,
         )
-    except ValueError as exc:
+    except ValueError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(exc),
-        ) from exc
+            detail="invalid_source",
+        ) from None
 
     return IndexDocumentsResponse(
         indexed_documents=result.indexed_documents,

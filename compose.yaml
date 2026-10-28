@@ -1,0 +1,53 @@
+name: legacy-rag-runtime
+
+services:
+  api:
+    image: legacy-rag-backend:runtime
+    build:
+      context: .
+    init: true
+    ports:
+      - "127.0.0.1:${LEGACY_RAG_RUNTIME_PORT:-8001}:8000"
+    environment:
+      LEGACY_RAG_DATA_ROOT: /app/data
+      LEGACY_RAG_MODEL_DIR: /models
+      LEGACY_RAG_CHROMA_PATH: /var/lib/legacy-rag/chroma
+      LEGACY_RAG_RETRIEVAL_PROFILE: identifier-aware
+      LEGACY_RAG_GENERATION_PROVIDER: disabled
+    volumes:
+      - type: bind
+        source: ./data/samples
+        target: /app/data/samples
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${LEGACY_RAG_RUNTIME_MODEL_DIR:-./data/models/models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2/snapshots/e8f8c211226b894fcb81acc59f3b34ba3efd5f42}
+        target: /models
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: volume
+        source: runtime-chroma
+        target: /var/lib/legacy-rag/chroma
+    read_only: true
+    tmpfs:
+      - /tmp:size=128m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).close()"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+volumes:
+  runtime-chroma:

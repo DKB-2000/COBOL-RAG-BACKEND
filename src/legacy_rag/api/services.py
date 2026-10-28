@@ -70,15 +70,22 @@ class StructuredDocumentIndexer:
     def __init__(
         self, *, data_root: Path, store: ChunkStore,
         embed_texts: Callable[[list[str]], Embeddings],
+        allowed_source_hashes: dict[str, str] | None = None,
     ) -> None:
         self._data_root = data_root
         self._store = store
         self._embed_texts = embed_texts
+        self._allowed_source_hashes = allowed_source_hashes
 
     def index(self, *, source_paths: list[str], rebuild: bool) -> IndexingResult:
         documents = load_cobol_files(
             [self._data_root / path for path in source_paths], data_root=self._data_root
         )
+        if self._allowed_source_hashes is not None and any(
+            self._allowed_source_hashes.get(doc.source_path) != doc.content_hash
+            for doc in documents
+        ):
+            raise ValueError("source is not approved for external generation")
         groups = [chunk_cobol_structure(document) for document in documents]
         chunks = [chunk for group in groups for chunk in group]
         # Compute all embeddings before any destructive replacement.
