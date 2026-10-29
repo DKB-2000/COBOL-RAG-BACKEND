@@ -14,6 +14,11 @@ HTTP200/answered, 주장2개/인용청크2개, HTTP 경과6.127초이며 답변�
 
 ## 계약과 설정
 
+2026-10-29부터 기본 검색은 BGE INT8 재순위화를 포함한다. 실제 서버를 실행하기 전에
+[BGE 의존성과 모델 준비](reranker-api.md)를 따른다. 기존 생성 평가15/24는 disabled 조건의
+이전 문맥 결과다. 새 문맥의 [실제 생성 비교](reranked-generation-comparison.md)에서는
+API 근거 충족22/24·올바른 거절6/6을 확인했다. 개발셋의 Codex1차 검수다.
+
 공식 Python SDK의 Responses API `responses.parse(text_format=GeneratedAnswer)`를 사용한다.
 시스템 지시와 질문/문맥을 역할별로 분리하고, 구조화된 주장·거절을 기존 계약으로 재검증한다.
 실제 제공한 청크 외의 ID 인용은 기존 서비스가 답변 전체를 거절한다.

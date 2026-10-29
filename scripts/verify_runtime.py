@@ -34,7 +34,7 @@ def main():
         request = Request(base + route, data=body, headers={"Content-Type": "application/json"})
         started = perf_counter()
         try:
-            with opener.open(request, timeout=60) as response:
+            with opener.open(request, timeout=5 if route == "/health" else 300) as response:
                 result = json.load(response)
         except HTTPError as error:
             raise RuntimeError(f"{route} failed with HTTP {error.code}; response body omitted") from None

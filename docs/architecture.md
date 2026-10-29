@@ -9,7 +9,7 @@
 ```text
 공개/합성 소스
   -> ingestion: 로딩 -> 정규화 -> 언어별 청킹 -> 메타데이터
-  -> retrieval: 임베딩 -> Chroma 저장 -> 필터/유사도 검색
+  -> retrieval: 임베딩 -> Chroma 저장 -> 후보 검색 -> BGE INT8 재순위화
   -> generation: 검색 문맥 -> 근거 기반 답변 + 출처
   -> api: HTTP 계약
 
@@ -48,9 +48,22 @@
 
 기본 검색은 다국어 구조·문맥화 입력의 원래 표현과 식별자 정규화 표현을 결합하는 identifier-aware 프로필과 api-v3 collection을 사용한다. original 프로필은 별도 collection으로 유지한다. `/query`는 원문 최대10개/4000자 문맥을 조립하고 주장별 출처를 검증한다. OpenAI는 기본 비활성화다. [실제 생성 전후 평가](generation-evaluation-v2.md)의 인용 충족13→15/24와 [무료 검색 검증](identifier-aware-retrieval-v1.md)의 근거 포함13→16/24를 구분한다. 실제 생성 회귀1건과 독립 사람 검수 미완료를 공개한다.
 
+현재 기본 재순위화는 `BAAI/bge-reranker-v2-m3`의 로컬 CPU 동적INT8이다.
+`/search`는 최소30개 후보를 재정렬한 뒤 응답 limit을 적용한다. `/query`는 재정렬된30개에서
+OpenAI 공개 경계를 먼저 적용한 다음 최대10개/4000자를 선택한다. 반환 score는 원래 벡터 유사도다.
+`LEGACY_RAG_RERANKING=disabled`로 이전 검색을 복구하며 설정 변경 후 재시작한다.
+실제 생성 결과15/24는 도입 전 기록이다. 새 문맥의 [실제 생성 비교](reranked-generation-comparison.md)는
+API 근거 충족22/24·거절6/6, Qwen17/24·거절3/6이다. Qwen의 메모리 실패1건도 분모에 포함한다.
+[API 연결과 무료 검증](reranker-api.md)에 모델 캐시·실행·장애·지연 조건을 기록한다.
+
 OpenAI 모드에서는 프로필에 맞는 별도 공개 collection과 공개 합성5개만 사용한다. 색인은 파일 경로·원문 해시를 검증하고, 생성 직전에는 승인된 청크의 ID·본문·메타데이터를 대조한다. 로컬 전용 COBOL은 외부 생성 문맥에서 제외한다. 일반 DLP나 질문 본문의 민감정보 탐지는 아니다. 설정은 [`openai-generation.md`](openai-generation.md), 기존 계약·검색 기록은 [`grounded-query-contract.md`](grounded-query-contract.md)를 따른다.
 
 ## 평가 게이트
+
+로컬 생성은 선택적 Ollama 어댑터로 `qwen3:4b`를 같은 호스트의 loopback API에 호출한다.
+기존 일반 검색 collection과 생성/인용 검증 계약을 재사용하며 기본 생성은 disabled다.
+완료된 최종 JSON만 수락하고 추론 필드는 응답으로 사용하지 않는다. 연결/시간 초과/잘린
+출력은 기존 unavailable 계약으로 격리한다. [설정과 검증 범위](ollama-generation.md)를 따른다.
 
 행 번호 입력은 경계 판별 때만 번호/식별 영역을 처리하고 원문 slice를 보존한다.
 지원 범위·공개 합성 사례와 기존52청크/30문항 회귀는

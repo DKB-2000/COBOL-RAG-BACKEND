@@ -35,13 +35,27 @@ def json_write(path, value, *, exclusive=True):
         stream.write(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
 
 
+def expected_context_ids(approved, profile, reranking):
+    if reranking == "disabled":
+        reference = json.loads((DATA / "evaluation/results/identifier-aware-retrieval-v1.json")
+                               .read_text(encoding="utf-8"))
+        return {key: row["context_ids"] for key, row in reference["profiles"][profile]["cases"].items()}
+    if profile != "identifier-aware":
+        raise ValueError("reranked evaluation requires identifier-aware; use disabled for original")
+    reference = json.loads((DATA / "evaluation/results/reranker-int8-length-v1.json")
+                           .read_text(encoding="utf-8"))
+    return {row["case_id"]: [chunk.chunk_id for chunk in assemble_context(
+        approved[key] for key in row["ranked_ids"])] for row in reference["rankings"]}
+
+
 class HttpProbe:
-    def __init__(self, client, approved, *, max_queries=0, journal=None):
+    def __init__(self, client, approved, *, max_queries=0, journal=None, search_limit=10):
         self.client, self.approved = client, approved
         self.remaining, self.journal = max_queries, journal
+        self.search_limit = search_limit
 
     def search(self, question):
-        response = self.client.post("/search", json={"query": question, "limit": 10})
+        response = self.client.post("/search", json={"query": question, "limit": self.search_limit})
         response.raise_for_status()
         results = []
         for item in response.json()["results"]:
@@ -102,6 +116,8 @@ def main():
     parser.add_argument("--prefix", default="generation-v1")
     parser.add_argument("--retrieval-profile", choices=("original", "identifier-aware"),
                         default="identifier-aware", help="Expected server profile; does not configure it")
+    parser.add_argument("--reranking", choices=("bge-int8", "disabled"), default="bge-int8",
+                        help="Expected server reranking; use disabled for historical baselines")
     args = parser.parse_args()
     if re.fullmatch(r"[a-z0-9-]+", args.prefix) is None:
         raise ValueError("prefix must be a filename, not a directory")
@@ -132,6 +148,8 @@ def main():
     approved = load_public_chunks(DATA)
     if len(approved) != 52:
         raise ValueError("the original public corpus changed or is incomplete")
+    expected_contexts = expected_context_ids(approved, args.retrieval_profile, args.reranking)
+    search_limit = 30 if args.reranking == "bge-int8" else 10
     load_evidence_requirements(EVIDENCE, cases=cases, data_root=DATA)
     rubric_records = [json.loads(line) for line in RUBRIC.read_text(encoding="utf-8").splitlines()]
     rubric = {record["case_id"]: record["required_points"] for record in rubric_records}
@@ -142,9 +160,9 @@ def main():
     input_hashes = {str(path.relative_to(PROJECT)): sha256(path.read_bytes()).hexdigest()
                     for path in input_paths}
     with httpx.Client(base_url="http://127.0.0.1:8000", trust_env=False,
-                      timeout=httpx.Timeout(60, connect=5)) as client:
+                      timeout=httpx.Timeout(300, connect=5)) as client:
         client.get("/health").raise_for_status()
-        probe = HttpProbe(client, approved)
+        probe = HttpProbe(client, approved, search_limit=search_limit)
         preflight = []
         for case in cases:
             context = assemble_context(probe.search(case.question))
@@ -159,6 +177,7 @@ def main():
             "answerable": 24, "unanswerable": 6, "model_expected": "gpt-6-luna",
             "actual_provider_model_observed": None, "max_query_calls": 30,
             "retrieval_profile_expected": args.retrieval_profile,
+            "reranking_expected": args.reranking, "preflight_search_limit": search_limit,
             "sdk_retries_expected": 0, "max_output_tokens_expected": 1000,
             "input_hashes": input_hashes, "preflight": preflight,
             "packages": {name: version(name) for name in ("openai", "httpx", "pydantic")},
@@ -178,11 +197,8 @@ def main():
             "cost_estimate_usd": {"typical_4000_input_1000_output_tokens_each": 0.027,
                                   "not_a_hard_spend_limit": True},
         }
-        reference = json.loads((DATA / "evaluation/results/identifier-aware-retrieval-v1.json")
-                               .read_text(encoding="utf-8"))
-        expected_contexts = reference["profiles"][args.retrieval_profile]["cases"]
         mismatches = [row["case_id"] for row in preflight
-                      if row["context_ids"] != expected_contexts[row["case_id"]]["context_ids"]]
+                      if row["context_ids"] != expected_contexts[row["case_id"]]]
         manifest["profile_context_mismatch_cases"] = mismatches
         if mismatches:
             json_write(target("preflight.json"), manifest, exclusive=False)
@@ -196,7 +212,8 @@ def main():
         json_write(target("manifest.json"), manifest)
         with target("attempts.jsonl").open("x", encoding="utf-8") as journal, \
                 target("responses.jsonl").open("x", encoding="utf-8") as output:
-            probe = HttpProbe(client, approved, max_queries=30, journal=journal)
+            probe = HttpProbe(client, approved, max_queries=30, journal=journal,
+                              search_limit=search_limit)
 
             def persist(record):
                 output.write(json.dumps(record, ensure_ascii=False) + "\n")

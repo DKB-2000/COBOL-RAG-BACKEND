@@ -13,6 +13,8 @@ services:
       LEGACY_RAG_MODEL_DIR: /models
       LEGACY_RAG_CHROMA_PATH: /var/lib/legacy-rag/chroma
       LEGACY_RAG_RETRIEVAL_PROFILE: identifier-aware
+      LEGACY_RAG_RERANKING: ${LEGACY_RAG_RERANKING:-bge-int8}
+      LEGACY_RAG_RERANKER_MODEL_DIR: /reranker
       LEGACY_RAG_GENERATION_PROVIDER: disabled
     volumes:
       - type: bind
@@ -30,6 +32,12 @@ services:
       - type: volume
         source: runtime-chroma
         target: /var/lib/legacy-rag/chroma
+      - type: bind
+        source: ${LEGACY_RAG_RUNTIME_RERANKER_DIR:-./data/models/models--BAAI--bge-reranker-v2-m3/snapshots/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e}
+        target: /reranker
+        read_only: true
+        bind:
+          create_host_path: false
     read_only: true
     tmpfs:
       - /tmp:size=128m,mode=1777

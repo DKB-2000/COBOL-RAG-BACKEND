@@ -1,5 +1,6 @@
 from functools import lru_cache
 from pathlib import Path
+from threading import Lock
 from typing import Annotated, Literal
 
 import chromadb
@@ -16,6 +17,7 @@ from legacy_rag.api.services import (
     VectorChunkSearcher,
 )
 from legacy_rag.generation.models import GenerationModel
+from legacy_rag.generation.ollama_model import OllamaGenerationModel, create_ollama_model
 from legacy_rag.generation.openai_model import OpenAIGenerationModel, create_openai_model
 from legacy_rag.generation.service import GroundedQueryService
 from legacy_rag.retrieval.chroma_store import ChromaChunkStore
@@ -25,8 +27,16 @@ from legacy_rag.retrieval.embedding import (
     IdentifierAwareOnnxEmbedding,
     MultilingualOnnxEmbedding,
 )
+from legacy_rag.retrieval.reranking import (
+    RERANKER_ID,
+    RERANKER_REVISION,
+    ContextSearcher,
+    LocalBgeReranker,
+    RerankedSearcher,
+)
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
+_reranker_creation_lock = Lock()
 
 
 class ApiSettings(BaseSettings):
@@ -38,8 +48,13 @@ class ApiSettings(BaseSettings):
         _PROJECT_ROOT / "data" / "models" / ("models--" + MODEL_ID.replace("/", "--"))
         / "snapshots" / MODEL_REVISION
     )
-    generation_provider: Literal["disabled", "openai"] = "disabled"
+    generation_provider: Literal["disabled", "openai", "ollama"] = "disabled"
     retrieval_profile: Literal["original", "identifier-aware"] = "identifier-aware"
+    reranking: Literal["bge-int8", "disabled"] = "bge-int8"
+    reranker_model_dir: Path = (
+        _PROJECT_ROOT / "data" / "models" / ("models--" + RERANKER_ID.replace("/", "--"))
+        / "snapshots" / RERANKER_REVISION
+    )
 
 
 class OpenAISettings(BaseSettings):
@@ -49,6 +64,13 @@ class OpenAISettings(BaseSettings):
     openai_model: Literal["gpt-6-luna"] = "gpt-6-luna"
     openai_timeout_seconds: float = Field(default=30.0, gt=0, le=120)
     openai_max_output_tokens: int = Field(default=1000, ge=64, le=2048)
+
+
+class OllamaSettings(BaseSettings):
+    model_config = SettingsConfigDict(env_prefix="LEGACY_RAG_")
+
+    ollama_timeout_seconds: float = Field(default=300.0, gt=0, le=600)
+    ollama_max_output_tokens: int = Field(default=1024, ge=64, le=4096)
 
 
 @lru_cache
@@ -93,18 +115,36 @@ def get_document_indexer() -> DocumentIndexer:
 
 
 @lru_cache
-def get_chunk_searcher() -> ChunkSearcher:
-    return VectorChunkSearcher(
-        store=get_chunk_store(),
-        embed_texts=get_embedding_function(),
-    )
+def _get_reranker() -> LocalBgeReranker:
+    return LocalBgeReranker(ApiSettings().reranker_model_dir.resolve())
 
 
 @lru_cache
-def get_generation_model() -> OpenAIGenerationModel | None:
-    if ApiSettings().generation_provider != "openai":
+def get_chunk_searcher() -> ChunkSearcher:
+    searcher = VectorChunkSearcher(
+        store=get_chunk_store(),
+        embed_texts=get_embedding_function(),
+    )
+    if ApiSettings().reranking == "disabled":
+        return searcher
+    # lru_cache alone permits concurrent misses; serialize the heavy model owner creation.
+    with _reranker_creation_lock:
+        ranker = _get_reranker()
+    return RerankedSearcher(searcher, ranker)
+
+
+@lru_cache
+def get_generation_model() -> OpenAIGenerationModel | OllamaGenerationModel | None:
+    provider = ApiSettings().generation_provider
+    if provider == "disabled":
         return None
     try:
+        if provider == "ollama":
+            local_settings = OllamaSettings()
+            return create_ollama_model(
+                timeout_seconds=local_settings.ollama_timeout_seconds,
+                max_output_tokens=local_settings.ollama_max_output_tokens,
+            )
         settings = OpenAISettings()
         if not settings.openai_api_key:
             return None
@@ -149,4 +189,6 @@ def get_query_service(
     settings = ApiSettings()
     if settings.generation_provider == "openai" or isinstance(model, OpenAIGenerationModel):
         searcher = PublicQuerySearcher(searcher, settings.data_root.resolve())
+    if settings.reranking == "bge-int8":
+        searcher = ContextSearcher(searcher)
     return GroundedQueryService(searcher=searcher, model=model)

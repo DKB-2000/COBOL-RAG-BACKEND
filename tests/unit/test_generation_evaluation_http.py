@@ -66,3 +66,23 @@ def test_existing_run_prevents_any_new_http_request(script, tmp_path, monkeypatc
     monkeypatch.setattr(script.httpx, "Client", forbidden)
     with pytest.raises(FileExistsError):
         script.main()
+
+
+def test_reranked_preflight_uses_all_candidates_and_frozen_context_policy(script):
+    approved = load_public_chunks(script.DATA)
+    requests = []
+
+    def transport(request):
+        import json
+        requests.append(json.loads(request.content))
+        return httpx.Response(200, json={"results": []})
+
+    with httpx.Client(base_url="http://127.0.0.1:8000", transport=httpx.MockTransport(transport)) as client:
+        assert script.HttpProbe(client, approved, search_limit=30).search("question") == []
+    assert requests == [{"query": "question", "limit": 30}]
+    original = script.expected_context_ids(approved, "identifier-aware", "disabled")
+    reranked = script.expected_context_ids(approved, "identifier-aware", "bge-int8")
+    assert len(original) == len(reranked) == 30
+    assert original != reranked
+    with pytest.raises(ValueError, match="requires identifier-aware"):
+        script.expected_context_ids(approved, "original", "bge-int8")

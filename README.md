@@ -8,7 +8,9 @@
 
 ## 주요 결과
 
-2026-10-27 검증 기록입니다. 공개 합성 **5개 파일·52개 청크**, 고정 **30문항(답변 가능 24개 + 근거 부족 6개)**을 사용했습니다.
+2026-10-29 [BGE 문맥 실제 생성 비교](docs/reranked-generation-comparison.md)를 완료했습니다. 같은 문맥에서 API의 정답·인용 충족은 **22/24**, Qwen3 4B는 **17/24**, 올바른 거절은 각각 **6/6·3/6**이었습니다. HTTP p50은 **10.492초·129.983초**였고 Qwen의 메모리 실패1건도 분모에 포함했습니다. 개발셋의 Codex1차 검수이며 독립 사람 검수는 미완료입니다.
+
+아래 표는 재순위화 도입 전인 2026-10-27의 실제 생성 검증 기록입니다. 공개 합성 **5개 파일·52개 청크**, 고정 **30문항(답변 가능 24개 + 근거 부족 6개)**을 사용했습니다.
 
 | 지표 | 개선 전 | 현재 |
 |---|---:|---:|
@@ -23,7 +25,7 @@
 
 - [30문항의 실제 질문·답변·출처·채점 결과](data/evaluation/results/generation-evaluation-v2.json)
 - [개선 전후 평가와 실패 분석](docs/generation-evaluation-v2.md)
-- Windows 전체 테스트 **186개 통과**. Linux는 실제 Docker 빌드·HTTP 동작·컨테이너 재생성 후 검색 결과 보존을 검증했습니다. Linux 전체 pytest를 실행한 결과는 아닙니다.
+- 현재 Windows 전체 테스트 **252개 통과**. 최신 BGE의 Linux 빌드·HTTP 검색·재생성 영속성은 확인했습니다. 필수 근거는 Windows와 같은 **22/24**지만 문맥 순서 완전 일치는 **0/30**으로 실패했습니다. [검증 결과와 한계](docs/runtime.md#최신-bge-linux-검증--2026-10-29)를 공개합니다.
 
 ## 실제 응답 사례
 
@@ -45,7 +47,7 @@ flowchart LR
     B --> C[구조 청킹 · SourceChunk]
     C --> D[로컬 ONNX 임베딩]
     D --> E[(Chroma)]
-    Q[한국어 질문] --> F[검색 · 문맥 조립]
+    Q[한국어 질문] --> F[후보 검색 · BGE INT8 · 문맥 조립]
     E --> F
     F --> G[OpenAI 구조화 응답]
     G --> H[인용 ID 검증]
@@ -58,7 +60,8 @@ flowchart LR
 | 수집·청킹 | COBOL division·section·paragraph 경계를 활용하고 원문과 심볼 메타데이터 보존. 행 번호 형식의 경계 판별 지원 |
 | 임베딩 · ONNX Runtime | 다국어 MiniLM을 CPU에서 로컬 실행. 한국어 질문과 COBOL 식별자를 함께 검색 |
 | 검색 · Chroma | 로컬 영속 저장소와 프로필별 collection으로 기준선·개선 결과 분리 |
-| 생성 · OpenAI Responses API | 구조화된 주장과 인용을 반환받아 실제 제공한 청크 ID인지 재검증. 기본 생성 비활성화 |
+| 재순위화 · BGE INT8 | 후보 최소30개를 CPU에서 재정렬하고 최대10개·4000자 문맥 선택 |
+| 생성 · OpenAI Responses API / 로컬 Ollama | 구조화된 주장과 인용을 반환받아 실제 제공한 청크 ID인지 재검증. 기본 생성 비활성화 |
 | 평가 · pytest / 고정 평가셋 | 검색 근거 확보와 실제 답변 품질을 분리하고 실패·회귀 사례까지 기록 |
 | 운영 · Docker Compose | 비root 실행, 읽기 전용 모델·샘플, 전용 영속 볼륨, 상태 검사와 제한된 요청 로그 |
 
@@ -88,19 +91,22 @@ docs/             # 설계·실험·운영 기록
 
 - [식별자 표현 보완과 전후 비교](docs/identifier-aware-retrieval-v1.md)
 - [행 번호 COBOL 호환성과 회귀 검증](docs/numbered-cobol-chunking.md)
-- [후보 확대·로컬 재순위화 실험](docs/retrieval-candidates.md): 근거 확보16/24→22/24, 기존 성공 회귀0. CPU 재순위화 p50 28.27초로 기본 적용 보류. 실제 답변 정확도와 구분합니다.
-- [재순위화 CPU 최적화](docs/reranker-speed.md): INT8·길이별 배치로 근거22/24를 유지하며 관측 p50 12.64초로 감소. 여전히 기본 API에는 적용하지 않았습니다.
+- [후보 확대·로컬 재순위화 실험](docs/retrieval-candidates.md): 근거 확보16/24→22/24, 기존 성공 회귀0. 실제 답변 정확도와 구분합니다.
+- [재순위화 CPU 최적화](docs/reranker-speed.md): INT8·길이별 배치로 근거22/24를 유지하며 재순위화만의 관측 p50 12.64초로 감소했습니다.
+- [BGE INT8 API 연결](docs/reranker-api.md): 실제 API에서 검색 근거16→22/24·회귀0을 재현했습니다. 생성 stub을 사용한 검색/문맥 HTTP p50/p95는11.425/15.810초입니다.
+- [BGE 문맥 실제 생성](docs/reranked-generation-comparison.md): API 근거 충족15→22/24, Qwen15→17/24. Qwen의 거절4→3/6과 실제 환각3건도 함께 보존했습니다.
 - 이전 실험: [구조 청킹](docs/structured-chunking-baseline.md) · [문맥화](docs/contextual-embedding-baseline.md) · [다국어 모델](docs/multilingual-embedding-baseline.md) · [관계 확장](docs/context-expansion-baseline.md) · [창 평균](docs/windowed-embedding-baseline.md)
 
 ## 빠른 시작 — 로컬 검색 데모
 
 Python 3.11과 Docker Desktop의 Linux 엔진이 필요합니다. 아래 명령은 저장소 루트의 **PowerShell**에서 실행합니다. 기본 실행에는 OpenAI 키가 필요하지 않으며 생성 API를 호출하지 않습니다.
 
-### 1. 의존성과 임베딩 모델 준비
+### 1. 의존성과 임베딩·재순위화 모델 준비
 
 ```powershell
 py -3.11 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e ".[dev,evaluation,openai]"
+.\.venv\Scripts\python.exe -m pip install "torch==2.14.1" --index-url https://download.pytorch.org/whl/cpu
+.\.venv\Scripts\python.exe -m pip install -e ".[dev,evaluation,openai,reranking]"
 ```
 
 API는 모델을 자동 다운로드하지 않습니다. 다음 명령으로 고정 revision의 공개 모델 파일을 준비합니다. 최초 다운로드는 약 480MB이며 외부 생성 API 호출은 없습니다. 같은 캐시가 있다면 재사용합니다.
@@ -110,6 +116,14 @@ API는 모델을 자동 다운로드하지 않습니다. 다음 명령으로 고
 ```
 
 모델은 `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, revision은 `e8f8c211226b894fcb81acc59f3b34ba3efd5f42`입니다. 다른 snapshot 경로를 사용하려면 `LEGACY_RAG_RUNTIME_MODEL_DIR`에 지정합니다.
+
+기본 검색에 필요한 BGE snapshot도 준비합니다. 아래 최초 다운로드는 약2.3GB이며, 기존 캐시는 재사용합니다. API는 누락된 모델을 자동 다운로드하지 않습니다.
+
+```powershell
+.\.venv\Scripts\python.exe -c "from huggingface_hub import snapshot_download; from legacy_rag.retrieval.reranking import RERANKER_ID, RERANKER_REVISION; print(snapshot_download(RERANKER_ID,revision=RERANKER_REVISION,allow_patterns=['config.json','model.safetensors','tokenizer.json','tokenizer_config.json','special_tokens_map.json','sentencepiece.bpe.model'],cache_dir='data/models',token=False,max_workers=2))"
+```
+
+Docker는 이 snapshot을 `/reranker`에 읽기 전용 연결합니다. 별도 경로는 `LEGACY_RAG_RUNTIME_RERANKER_DIR`로 지정합니다. 재순위화는 CPU에서 동작하며 첫 검색에는 모델 로딩·INT8 변환이 추가됩니다. 설치·복구·지연 측정은 [BGE 실행 안내](docs/reranker-api.md)를 참고하세요.
 
 ### 2. Docker 실행과 공개 샘플 색인
 
@@ -155,7 +169,7 @@ $env:LEGACY_RAG_GENERATION_PROVIDER = "disabled"
 | API | 역할 |
 |---|---|
 | `GET /health` | 프로세스 상태 확인 |
-| `GET /ready` | 실제 로컬 검색과 비어 있지 않은 색인 확인. OpenAI 준비 검사는 아님 |
+| `GET /ready` | 로컬 검색·기본 BGE 재순위화·비어 있지 않은 색인 확인 |
 | `POST /documents/index` | 데이터 루트 기준 상대 경로의 파일 색인 |
 | `POST /search` | 관련 코드 청크·출처·점수 반환 |
 | `POST /query` | 근거 기반 답변 또는 `refused` / `unavailable` 반환 |
@@ -163,6 +177,15 @@ $env:LEGACY_RAG_GENERATION_PROVIDER = "disabled"
 기본 생성 비활성화 상태에서는 문맥이 있어도 `/query`가 `unavailable / generation_unavailable`을 반환합니다. 실제 OpenAI 생성에는 서버 환경변수의 키와 공급자 설정이 필요하며 비용이 발생합니다. [OpenAI 연결 안내](docs/openai-generation.md)와 [Docker 선택 구성](docs/runtime.md#선택적-openai-연결)을 따르세요. 평가 당시 설정 모델은 `gpt-6-luna`입니다.
 
 OpenAI 모드에서는 승인된 공개 합성 5개 파일의 경로·해시와 생성 직전 청크 내용을 대조합니다. 로컬 전용 COBOL은 외부 생성 입력에서 제외합니다. 질문 본문의 일반 민감정보 탐지·마스킹은 구현하지 않았습니다.
+
+로컬 생성은 `LEGACY_RAG_GENERATION_PROVIDER=ollama`로 선택합니다. 설치된 `qwen3:4b`를
+같은 호스트의 Ollama API로 호출하며 기존 검색 색인을 재사용합니다. [Ollama 연결 안내](docs/ollama-generation.md)를
+참고하세요. 어댑터의 오프라인 계약 검증과 실제 RAG 품질 평가는 구분합니다.
+
+[도입 전 Qwen3/API 비교](docs/ollama-generation-comparison.md): 같은30문항에서 근거 충족은
+둘 다15/24였지만, Qwen3의 올바른 거절은4/6(API6/6), 로컬 CPU p50은88.176초(API1.630초)였습니다.
+절전 영향5건을 별도 재측정했으며 최초 실패와 검수 한계도 보고서에 보존했습니다.
+새 기본 문맥의 비교는 [BGE 생성 평가](docs/reranked-generation-comparison.md)를 따릅니다.
 
 ## 테스트와 운영 검증
 
@@ -172,19 +195,22 @@ $env:LEGACY_RAG_GENERATION_PROVIDER = "disabled"
 ```
 
 테스트는 가짜 응답과 MockTransport를 사용하며 실제 OpenAI 호출이 필요하지 않습니다. 테스트 통과와 실제 답변 품질 평가는 별개입니다.
+기존 테스트는 재순위화를 끈 상태를 유지하고, 전용 통합 테스트에서 기본 BGE 연결을 가짜 ranker로 검증합니다. 실제 모델의 HTTP 검증은 `scripts/verify_reranking_api.py --execute`로 분리합니다.
 
-| 검증 항목 | 2026-10-27 관측 결과 |
+| 검증 항목 | 2026-10-29 BGE Linux 관측 결과 |
 |---|---|
-| Windows 테스트 | 186 passed |
-| Linux Docker | 이미지 빌드·실제 HTTP·컨테이너 재생성 검증 완료 |
-| 최초 색인 | 5개 파일·52청크, 초기화 포함 20.459초 |
-| 재생성 후 warm 검색 | p50 0.030초 / p95 0.039초, 같은 질문 순차 10회 |
+| Windows 테스트 | 252 passed; Linux 전체 pytest는 미실행 |
+| Linux Docker | 이미지 빌드·CPU INT8·실제 HTTP·컨테이너 재생성 확인 |
+| 최초 색인 | 5개 파일·52청크, 초기화 포함 28.689초 |
+| 재생성 후 warm 검색 | p50 9.184초 / p95 12.251초, 같은 질문 순차 10회 |
 | 영속성 | 재색인 없이 상위 10청크 해시 일치 |
+| Windows와 검색 근거 비교 | 후보 집합 30/30·필수 근거 충족 문항 22/24 동일, 회귀0 |
+| Windows와 문맥 완전 일치 | **0/30, 실패**; Linux 실제 생성 품질은 미측정 |
 | 기본 실행 보호 | UID10001, 읽기 전용 rootfs·모델·샘플, loopback 바인딩, 키 미전달 |
 
-검색 지연은 작은 단일 질문 표본이며 동시성 SLA가 아닙니다. 생성 지연과도 구분합니다. 요청 로그에는 서버 생성 ID·상태·지연 등 허용 필드만 남기며 질문·코드·키·원시 예외는 제외합니다.
+기존 컨테이너를 보존하고 전용 project·8015 포트·볼륨으로 검증했습니다. 검증 서비스는 정지했고 이미지와 볼륨은 보존했습니다. 문맥 동등성은 통과하지 않았으므로 Windows의 API/Qwen 생성 점수를 Linux 결과로 해석할 수 없습니다. 검색 지연은 작은 순차 표본이며 동시성 SLA가 아닙니다. 요청 로그에는 서버 생성 ID·상태·지연 등 허용 필드만 남깁니다.
 
-측정 조건과 장애 계약은 [운영 안내](docs/runtime.md), [Linux 검증 결과](data/evaluation/results/runtime-verification-v2.json), [설치 패키지 목록](data/evaluation/results/runtime-linux-packages-v1.txt)에 기록했습니다. 설치 목록은 관측 snapshot이며 향후 빌드를 고정하는 의존성 lock은 아닙니다.
+측정 조건과 장애 계약은 [운영 안내](docs/runtime.md), [최신 BGE Linux 결과](data/evaluation/results/runtime-bge-docker-verification-v1.json), [설치 패키지 목록](data/evaluation/results/runtime-bge-linux-packages-v1.txt)에 기록했습니다. [도입 전 Linux 기록](data/evaluation/results/runtime-verification-v2.json)도 보존했습니다. 설치 목록은 관측 snapshot이며 향후 빌드를 고정하는 의존성 lock은 아닙니다.
 
 ## 한계와 남은 작업
 

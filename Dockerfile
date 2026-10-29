@@ -16,7 +16,8 @@ RUN apt-get update \
 
 COPY pyproject.toml README.md ./
 COPY src/ ./src/
-RUN python -m pip install --no-cache-dir ".[openai]"
+RUN python -m pip install --no-cache-dir "torch==2.14.1" --index-url https://download.pytorch.org/whl/cpu \
+    && python -m pip install --no-cache-dir ".[openai,reranking]"
 COPY logging.json ./
 
 USER 10001:10001
