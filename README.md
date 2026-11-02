@@ -27,6 +27,7 @@ Windows에서 공개 합성 **5개 파일·52개 청크**, 고정 **30문항(답
 - [최신 평가 조건·API/Qwen 비교·실패 분석](docs/reranked-generation-comparison.md)
 - [최신 30문항의 실제 응답·인용·검수·모델 ID](data/evaluation/results/reranked-generation-comparison-v1.json)
 - 현재 Windows 전체 테스트 **252개 통과**. 최신 BGE의 Linux 빌드·HTTP 검색·재생성 영속성은 확인했습니다. 필수 근거는 Windows와 같은 **22/24**지만 문맥 순서 완전 일치는 **0/30**으로 실패했습니다. [검증 결과와 한계](docs/runtime.md#최신-bge-linux-검증--2026-10-29)를 공개합니다.
+- 2026-11-02 [Kubernetes 단일 노드 실습](docs/runtime.md#kubernetes-로컬-실습): 실제 API 배포·Pod 재생성·동일 PVC에서 재색인 없는 검색 해시 보존을 확인했습니다. 생성 호출은0회이며 검증 후 Pod·노드를 정지하고 데이터를 보존했습니다. [실습 결과 JSON](data/evaluation/results/kubernetes-lab-verification-v1.json)을 공개합니다. 기업 프라이빗 클라우드 운영·고가용성 검증은 포함하지 않습니다.
 
 ### 이전 API 개선 기록 — BGE 도입 전, 2026-10-27
 

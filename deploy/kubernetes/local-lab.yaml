@@ -1,0 +1,187 @@
+# Single-node practice only. Use the dedicated kind-legacy-rag-lab context.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: legacy-rag-lab
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rag-config
+  namespace: legacy-rag-lab
+data:
+  LEGACY_RAG_DATA_ROOT: /app/data
+  LEGACY_RAG_MODEL_DIR: /models
+  LEGACY_RAG_CHROMA_PATH: /var/lib/legacy-rag/chroma
+  LEGACY_RAG_RETRIEVAL_PROFILE: identifier-aware
+  LEGACY_RAG_RERANKING: bge-int8
+  LEGACY_RAG_RERANKER_MODEL_DIR: /reranker
+  LEGACY_RAG_GENERATION_PROVIDER: disabled
+  HF_HUB_OFFLINE: "1"
+  TRANSFORMERS_OFFLINE: "1"
+  HF_HUB_DISABLE_TELEMETRY: "1"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: legacy-rag-lab-chroma
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  local:
+    path: /var/local/legacy-rag/chroma
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - legacy-rag-lab-control-plane
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rag-chroma
+  namespace: legacy-rag-lab
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  volumeName: legacy-rag-lab-chroma
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-api
+  namespace: legacy-rag-lab
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  progressDeadlineSeconds: 900
+  # Chroma PersistentClient has one owner. Do not use RollingUpdate or scale out.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: legacy-rag-api
+  template:
+    metadata:
+      labels:
+        app: legacy-rag-api
+    spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api
+          image: legacy-rag-backend:k8s-lab-v1
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: rag-config
+          resources:
+            requests:
+              cpu: "1"
+              memory: 3Gi
+            limits:
+              cpu: "4"
+              memory: 4Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          startupProbe:
+            # Gate readiness searches until the first HTTP index operation is done.
+            # This marker lives on the PVC and survives Pod recreation.
+            exec:
+              command:
+                - python
+                - -c
+                - >-
+                  import sys, urllib.request;
+                  from pathlib import Path;
+                  ready = Path('/var/lib/legacy-rag/chroma/.lab-initialized').is_file();
+                  sys.exit(0 if ready and urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status == 200 else 1)
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 120
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+          # This endpoint runs real CPU retrieval. Avoid the default 1s timeout.
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            periodSeconds: 120
+            timeoutSeconds: 120
+            failureThreshold: 3
+          volumeMounts:
+            - name: chroma
+              mountPath: /var/lib/legacy-rag/chroma
+            - name: samples
+              mountPath: /app/data/samples
+              readOnly: true
+            - name: embedding-model
+              mountPath: /models
+              readOnly: true
+            - name: reranker-model
+              mountPath: /reranker
+              readOnly: true
+            - name: temporary
+              mountPath: /tmp
+      volumes:
+        - name: chroma
+          persistentVolumeClaim:
+            claimName: rag-chroma
+        - name: samples
+          hostPath:
+            path: /var/local/legacy-rag/samples
+            type: Directory
+        - name: embedding-model
+          hostPath:
+            path: /var/local/legacy-rag/models
+            type: Directory
+        - name: reranker-model
+          hostPath:
+            path: /var/local/legacy-rag/reranker
+            type: Directory
+        - name: temporary
+          emptyDir:
+            sizeLimit: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-api
+  namespace: legacy-rag-lab
+spec:
+  type: ClusterIP
+  selector:
+    app: legacy-rag-api
+  ports:
+    - name: http
+      port: 8000
+      targetPort: http

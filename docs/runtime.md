@@ -274,6 +274,159 @@ base digest, 설치 목록 해시, 컨테이너 전후 메타데이터, 측정 �
 요약과 설정/코드 해시를 보존한다. 기존 [실제 생성 평가](generation-evaluation-v2.md)를
 재사용하고 추가 유료 생성을 하지 않았다.
 
+## Kubernetes 로컬 실습
+
+목표는 기존 검색 API를 전용 단일 노드 클러스터에 배포하고, Pod 재생성 후에도 공개 색인과
+검색 결과가 유지되는지 검증하는 것이다. Windows Docker Desktop의 Linux 엔진을 기준으로 한다.
+생성은 disabled이며 기존 BGE와 MiniLM 모델을 읽기 전용으로 재사용한다. 기업 프라이빗 클라우드
+운영·고가용성·다중 노드 장애복구·자동 확장 경험을 검증한 범위는 아니다.
+
+### 실제 확인 결과 — 2026-11-02
+
+전용 kind 클러스터 생성, 서버측 manifest dry-run, 실제 API 배포와 PVC Bound를 확인했다.
+공개5개52청크의 최초 HTTP 색인·검색을 완료한 뒤 Recreate로 Pod를 재생성했다.
+새 Pod가 Ready가 됐고 **Pod UID 변경·PVC/PV UID 및 runtime imageID 유지·재색인 없이
+검색 상위10청크 ID/본문/메타데이터 해시 일치**가 모두 통과했다. 두 Pod의 관측 시점 restart count는0이었다.
+
+| 관측 | 결과 |
+|---|---:|
+| 단일 노드 클러스터 생성 | 85.417초 |
+| 최초 공개5개52청크 색인, 초기화 포함 | 17.636초 |
+| 최초 실제 HTTP `/ready` | 33.369초 |
+| Recreate 요청부터 새 Pod Ready까지 | 73.756초 |
+| 재생성 전 warm 검색 p50/p95, n10 | 8.964초 / 10.313초 |
+| 재생성 후 warm 검색 p50/p95, n10 | 13.011초 / 31.195초 |
+| API 컨테이너 cgroup memory.peak, 전/후 | 3.067GiB / 3.115GiB, limit4Gi |
+| API 정지 후 전용 저장소 크기, 표식 포함 | 684218bytes |
+| 오프라인 Windows pytest | 252 passed, 16.37초 |
+| 실제 LLM 생성·`/query`·유료 API | 0회 |
+
+공유 PC의 메모리 압박과 주기적인 readiness 검색 부하를 통제하지 않았다. 전후 지연 차이를
+Kubernetes 자체 오버헤드나 서비스 SLA로 해석하지 않는다. cgroup peak도 전체 호스트의 통제된
+최대 메모리 측정과 구분한다. Linux에서는 실제 Kubernetes/HTTP 검증을 했으며 전체 pytest는 실행하지 않았다.
+
+검증 후 API를0개로 줄이고 전용 kind 노드를 정지했다. PV/PVC·호스트 데이터·전용 kubeconfig·이미지는
+보존했다. 기존 Docker 컨테이너4개와 볼륨, 기본 kubeconfig가 유지됨을 확인했다.
+[공개 검증 JSON](../data/evaluation/results/kubernetes-lab-verification-v1.json)에 전후 UID·이미지·
+검색 해시·권한·자원·원본 해시를 보존했다. 인증서가 들어 있는 kubeconfig와 DB 원문은 Git에서 제외한다.
+원시 실행 자료는 `artifacts/k8s-lab-v1-*`에 있다.
+
+### 구성과 저장소 계약
+
+- kind v0.33.0, Kubernetes v1.36.4의 공식 노드 이미지를 digest로 고정한다.
+- cluster/context는 `legacy-rag-lab` / `kind-legacy-rag-lab`, namespace는 `legacy-rag-lab`이다.
+- kubeconfig는 Git 제외 `artifacts/k8s-lab-v1.kubeconfig`만 사용한다. 기본 kubeconfig는 변경하지 않는다.
+- `deploy/kubernetes/local-lab.yaml`에 ConfigMap, PV/PVC, Deployment, ClusterIP Service를 둔다.
+- API는 replicas1·worker1·Recreate다. 기존 Pod가 종료된 뒤 새 Pod를 생성하며, 동시 Chroma 소유를
+  피한다. 복제본 증가나 HPA는 이 구성의 지원 범위가 아니다.
+- API 자원은 CPU request1/limit4, memory request3Gi/limit4Gi다. 호스트 RAM과 VM 가용량을 먼저 확인한다.
+- 모델/샘플은 노드의 읽기 전용 마운트, DB는 전용 호스트 디렉터리 `artifacts/k8s-lab-v1-chroma`를
+  사용하는 local PV다. PVC/PV와 호스트 원본 디렉터리를 구분한다. 다른 노드로 자동 이동하지 않는다.
+- 최초 색인 동안 startup probe가 PVC의 `.lab-initialized` 표식을 기다려 readiness 검색과 색인이
+  겹치지 않게 한다. 표식은 공개 색인·HTTP 검증 성공 후에만 생성한다. 이후 startup은 표식과 `/health`,
+  readiness는 실제 `/ready`를 검사한다. `/ready`는 CPU 재순위화를 하므로 timeout/주기를 길게 설정했다.
+- nonroot10001·읽기 전용 rootfs·capability 제거·서비스 계정 토큰 미마운트를 적용한다.
+  노드의 모델 경로를 쓰는 학습용 구성으로, production 보안 정책을 충족한다고 주장하지 않는다.
+
+### 준비와 배포
+
+먼저 [kind 공식 설치 안내](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)에 따라
+v0.33.0 Windows amd64 실행 파일을 받고 공식 `.sha256sum`과 `Get-FileHash -Algorithm SHA256`을
+대조한다. 아래 예시는 실행 파일을 `artifacts/kind-v0.33.0-windows-amd64.exe`에 둔다.
+kubectl1.36 계열과 로컬 모델 파일, Docker Linux 엔진이 준비되어 있어야 한다.
+
+새 환경에서는 기존 Dockerfile로 `legacy-rag-backend:k8s-lab-v1` 이미지를 빌드한다.
+이미 준비한 검증 이미지가 있으면 재사용하고 이미지 ID를 기록한다. `imagePullPolicy: Never`이므로
+아래 load 단계를 생략하면 Pod가 실행되지 않는다. 기존 실습의 config·결과 파일은 덮어쓰지 않는다.
+
+```powershell
+# 이미지가 없는 새 환경에서만 실행한다.
+docker build -t legacy-rag-backend:k8s-lab-v1 .
+
+.\.venv\Scripts\python.exe scripts/prepare_k8s_lab.py
+$kind = Join-Path $PWD 'artifacts/kind-v0.33.0-windows-amd64.exe'
+$config = Join-Path $PWD 'artifacts/k8s-lab-v1.kubeconfig'
+& $kind create cluster --name legacy-rag-lab --config artifacts/k8s-lab-v1-kind.json --kubeconfig $config --wait 180s
+& $kind load docker-image legacy-rag-backend:k8s-lab-v1 --name legacy-rag-lab
+$lab = @('--kubeconfig', $config, '--context', 'kind-legacy-rag-lab')
+kubectl @lab get nodes
+kubectl @lab apply -f deploy/kubernetes/local-lab.yaml
+kubectl @lab -n legacy-rag-lab get pods,pvc
+```
+
+`prepare_k8s_lab.py`는 기존 샘플·모델 디렉터리가 있는지 확인하고 전용 kind config만 만든다.
+모델 다운로드나 클러스터 시작은 수행하지 않는다. 생성한 파일에는 호스트 경로가 있으므로 artifacts에 둔다.
+모델과 전용 DB 디렉터리가 UID10001에 각각 읽기/쓰기 가능한지 확인한다. 기존 DB의 권한을 일괄 변경하거나
+삭제하지 않는다. 처음에는 색인 완료 표식이 없어 Pod가 Running/NotReady인 것이 예상 상태다.
+
+### 최초 색인과 검색 확인
+
+아래 port-forward는 별도 터미널에서 실행한다. Service는 내부용이며 외부 공개 접속을 열지 않는다.
+Pod가 바뀌면 연결도 새로 시작해야 한다.
+
+```powershell
+$lab = @('--kubeconfig', (Join-Path $PWD 'artifacts/k8s-lab-v1.kubeconfig'), '--context', 'kind-legacy-rag-lab')
+$pod = (kubectl @lab -n legacy-rag-lab get pod -l app=legacy-rag-api -o json | ConvertFrom-Json).items[0].metadata.name
+kubectl @lab -n legacy-rag-lab port-forward --address 127.0.0.1 "pod/$pod" 8016:8000
+```
+
+다른 터미널에서 공개5개52청크의 색인·검색을 확인한 뒤 준비 상태를 활성화한다.
+실패하면 결과와 로그를 보존하고 표식을 생성하지 않는다. 표식 대기는 최대10분이며,
+준비가 오래 걸리면 Pod 재시작과 원인을 함께 기록한다.
+
+```powershell
+$lab = @('--kubeconfig', (Join-Path $PWD 'artifacts/k8s-lab-v1.kubeconfig'), '--context', 'kind-legacy-rag-lab')
+$pod = (kubectl @lab -n legacy-rag-lab get pod -l app=legacy-rag-api -o json | ConvertFrom-Json).items[0].metadata.name
+.\.venv\Scripts\python.exe scripts/verify_runtime.py --port 8016 --index --output artifacts/k8s-lab-v1-before.json
+if ($LASTEXITCODE -ne 0) { throw 'Index/search verification failed; keep bootstrap gate closed.' }
+kubectl @lab -n legacy-rag-lab exec $pod -- python -c "from pathlib import Path; Path('/var/lib/legacy-rag/chroma/.lab-initialized').write_text('public-v1-indexed-5-52', encoding='utf-8')"
+kubectl @lab -n legacy-rag-lab wait --for=condition=Ready "pod/$pod" --timeout=240s
+```
+
+### Pod 재생성과 데이터 보존
+
+기존 Pod 이름/UID, PVC UID, runtime imageID를 먼저 저장한다. port-forward를 종료하고
+Recreate 전략으로 재시작한 뒤, 이전 Pod 삭제와 새 Pod 생성·준비 상태를 확인한다.
+임의 Pod 삭제와 동시에 재색인을 수행하지 않는다.
+
+```powershell
+kubectl @lab -n legacy-rag-lab rollout restart deployment/rag-api
+kubectl @lab -n legacy-rag-lab rollout status deployment/rag-api --timeout=300s
+kubectl @lab -n legacy-rag-lab get pods,pvc
+```
+
+새 Pod로 port-forward를 다시 열고 **재색인 없이** 비교한다.
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_runtime.py --port 8016 --compare artifacts/k8s-lab-v1-before.json --output artifacts/k8s-lab-v1-after.json
+```
+
+합격 증거는 새 Pod UID·같은 PVC UID/runtime imageID·검색 상위10청크 ID/본문/메타데이터 해시
+일치다. 전체 DB 백업 무결성·장애 노드로부터의 복구·LLM 답변 품질 평가는 별도다.
+Windows/Linux 문맥 동등성 실패도 기존 미해결 항목으로 유지한다.
+
+### 실습 정지와 재개
+
+```powershell
+kubectl @lab -n legacy-rag-lab scale deployment/rag-api --replicas=0
+kubectl @lab -n legacy-rag-lab wait --for=delete pod -l app=legacy-rag-api --timeout=120s
+# 메모리 회수를 위해 전용 노드까지 멈출 때만 실행한다. 데이터는 삭제하지 않는다.
+docker stop legacy-rag-lab-control-plane
+
+# 재개
+docker start legacy-rag-lab-control-plane
+kubectl @lab wait --for=condition=Ready node/legacy-rag-lab-control-plane --timeout=180s
+kubectl @lab -n legacy-rag-lab scale deployment/rag-api --replicas=1
+kubectl @lab -n legacy-rag-lab rollout status deployment/rag-api --timeout=300s
+```
+
+kubectl 명령은 항상 전용 kubeconfig/context를 명시한다. kubeconfig·원시 로그·DB·도구 실행 파일은
+Git에서 제외한다. namespace/PVC/PV/클러스터 삭제는 위 정지 절차에 포함되지 않는다.
+
+실습을 직접 재현한 뒤에는 다음을 설명할 수 있어야 한다: replicas1/Recreate를 선택한 이유,
+startup/liveness/readiness의 역할 차이, Pod와 PVC의 수명 차이, 이번 검증이 노드 장애복구나
+백업·복원 검증과 다른 이유. 모니터링·예기치 않은 장애·백업/복원·다중 노드 실습은 후속 범위다.
+
 참고: [Compose 서비스 명세](https://docs.docker.com/reference/compose-file/services/),
 [Dockerfile 명세](https://docs.docker.com/reference/dockerfile/),
 [Uvicorn 로그 설정](https://uvicorn.dev/concepts/logging/).
