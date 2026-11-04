@@ -101,7 +101,11 @@ docker stop legacy-rag-lab-control-plane
 
 이번실행은 Pod0·Secret삭제·노드정지를 확인했고 3회정지관측을 보존했다.
 원래DB6파일·타컨테이너4개·볼륨목록·기본kubeconfig는 불변이며 공개색인52행·PVC·모델도 보존했다.
-노드가 나중에 임의재기동해도 replicas0이라 생성Pod가 자동실행되지 않도록 종료했다.
+정리 직후의 정지확인은 위 시각의 관측값이다. 후속확인에서 노드가 06:13:40 UTC에
+다시 시작된 것을 관측했다. 원인은 미확정이며 restart policy는 변경하지 않았다.
+이때 API replicas0·Pod0·OpenAI Secret 부재를 확인했고 추가생성은 없었다.
+전용노드만 다시 정지하고 RunningFalse를3회 확인했다. 노드 재기동을
+Kubernetes 자동장애복구 성과로 해석하지 않는다. 후속관측도 결과JSON에 보존했다.
 
 ## Kubernetes와 외부접속
 

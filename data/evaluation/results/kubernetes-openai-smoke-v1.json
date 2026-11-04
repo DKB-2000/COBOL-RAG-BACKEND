@@ -188,5 +188,37 @@
     "Context reconstructed from a separate search; actual outgoing model prompt, model ID, token usage and billing were not instrumented.",
     "Windows/Linux context order mismatch remains unresolved.",
     "Local ClusterIP and loopback port-forward only; no external IP access or multi-node/high-availability claim."
-  ]
+  ],
+  "post_cleanup_node_observation": {
+    "observed_restart_started_at_utc": "2026-11-04T06:13:40.988023404Z",
+    "previous_cleanup_stop_at_utc": "2026-11-04T06:08:32.282797544Z",
+    "cause": "unknown; previously observed issue; not evidence of Kubernetes workload self-healing",
+    "api_replicas_before_restop": 0,
+    "api_pods_before_restop": 0,
+    "openai_secret_before_restop": "absent",
+    "additional_model_calls": 0,
+    "restart_policy_unchanged": {
+      "Name": "on-failure",
+      "MaximumRetryCount": 1
+    },
+    "restopped_node": "legacy-rag-lab-control-plane",
+    "observations": [
+      {
+        "time_utc": "2026-11-04T06:15:07.769162+00:00",
+        "running": false,
+        "finished_at": "2026-11-04T06:15:07.228344718Z"
+      },
+      {
+        "time_utc": "2026-11-04T06:15:12.824224+00:00",
+        "running": false,
+        "finished_at": "2026-11-04T06:15:07.228344718Z"
+      },
+      {
+        "time_utc": "2026-11-04T06:15:17.883932+00:00",
+        "running": false,
+        "finished_at": "2026-11-04T06:15:07.228344718Z"
+      }
+    ],
+    "pvc_and_data_deleted": false
+  }
 }
