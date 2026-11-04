@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-api
+  namespace: legacy-rag-lab
+spec:
+  template:
+    spec:
+      containers:
+        - name: api
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rag-openai-credentials
+                  key: OPENAI_API_KEY
+          startupProbe:
+            exec:
+              command:
+                - python
+                - -c
+                - >-
+                  import sys, urllib.request;
+                  from pathlib import Path;
+                  ready = Path('/var/lib/legacy-rag/chroma/openai-public-v1/.lab-initialized').is_file();
+                  sys.exit(0 if ready and urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).status == 200 else 1)

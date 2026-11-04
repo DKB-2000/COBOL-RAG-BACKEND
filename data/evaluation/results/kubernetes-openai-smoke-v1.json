@@ -1,0 +1,192 @@
+{
+  "schema_version": "kubernetes-openai-smoke-v1",
+  "observed_at_utc": "2026-11-04T06:08:15.962585+00:00",
+  "reviewed_at_utc": "2026-11-04T06:09:47.619552+00:00",
+  "scope": "Three public integration cases on local single-node kind; not a new accuracy benchmark",
+  "environment": {
+    "kind": "0.33.0",
+    "kubernetes": "1.36.4",
+    "node_count": 1,
+    "api_container_count": 1,
+    "provider_configured": "openai",
+    "model_configured": "gpt-6-luna",
+    "actual_provider_model_id_observed": null,
+    "openai_sdk_version": "2.54.0",
+    "reranking": "bge-int8",
+    "public_source_files": 5,
+    "public_chunks": 52,
+    "source_files_verified": 45,
+    "image_id": "docker.io/library/import-2026-11-02@sha256:df9217fc138089497b9e2d78f64b1db348fee20184279a1a23c703cb0835821b",
+    "container_restarts": 0,
+    "uid": 10001,
+    "memory_current_peak_limit_events": "3749335040\n3775819776\n4294967296\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n"
+  },
+  "requests": {
+    "case_ids": [
+      "q001",
+      "q014",
+      "q025"
+    ],
+    "maximum_approved_calls": 3,
+    "api_query_attempts": 3,
+    "http200": 3,
+    "answered": 2,
+    "refused": 1,
+    "unavailable": 0,
+    "sdk_retries": 0,
+    "max_output_tokens": 1000,
+    "provider_timeout_seconds": 30,
+    "actual_token_usage": null,
+    "actual_billed_cost_usd": null,
+    "local_llm_calls": 0
+  },
+  "checks": {
+    "expected_behaviors_passed": 3,
+    "cases": 3,
+    "source_ids_and_metadata_verified_against_public_corpus": true,
+    "independent_human_review": false,
+    "actual_model_prompt_captured": false,
+    "windows_context_order_equal": 0,
+    "windows_context_order_cases": 3,
+    "external_ingress_enabled": false
+  },
+  "results": [
+    {
+      "case_id": "q001",
+      "question": "고객 입력 파일을 여는 문단은 무엇인가?",
+      "http_status": 200,
+      "response": {
+        "status": "answered",
+        "answer": "고객 입력 파일을 여는 문단은 `OPEN-FILES`이며, `OPEN INPUT CUSTOMER-IN`으로 입력 파일을 엽니다. [608664edd60ca0ca617327a1bd101b03ea2dc1e97b04118aa2b9a2ce5eab8c19]",
+        "reason": null,
+        "claims": [
+          {
+            "text": "고객 입력 파일을 여는 문단은 `OPEN-FILES`이며, `OPEN INPUT CUSTOMER-IN`으로 입력 파일을 엽니다.",
+            "chunk_ids": [
+              "608664edd60ca0ca617327a1bd101b03ea2dc1e97b04118aa2b9a2ce5eab8c19"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "chunk_id": "608664edd60ca0ca617327a1bd101b03ea2dc1e97b04118aa2b9a2ce5eab8c19",
+            "source_path": "samples/customer-import.cbl",
+            "language": "cobol",
+            "symbol": "OPEN-FILES",
+            "chunk_index": 8,
+            "score": 0.436374306678772
+          }
+        ]
+      },
+      "query_elapsed_seconds": 17.684239,
+      "request_id": "7cc39e8d1eac44c8bbbaab48cacfd8a6",
+      "review": {
+        "reviewer": "Codex Orchestrator, first-pass source comparison",
+        "expected_behavior_passed": true,
+        "comment": "Expected program/paragraph and cited public call or file-open code agree.",
+        "cited_code": [
+          {
+            "chunk_id": "608664edd60ca0ca617327a1bd101b03ea2dc1e97b04118aa2b9a2ce5eab8c19",
+            "source_path": "samples/customer-import.cbl",
+            "symbol": "OPEN-FILES",
+            "text": "       OPEN-FILES.\n           OPEN INPUT CUSTOMER-IN\n                OUTPUT CUSTOMER-OUT CUSTOMER-ERROR.\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "q014",
+      "question": "TRANSACTION-POST가 잔액 계산을 위해 호출하는 프로그램은 무엇인가?",
+      "http_status": 200,
+      "response": {
+        "status": "answered",
+        "answer": "TRANSACTION-POST는 잔액 계산을 위해 `ACCOUNT-BALANCE` 프로그램을 호출합니다. [a61008b04d21b3ec552b9d1de7a211e9a22828af8fced50d1ef69a3153084c6e]",
+        "reason": null,
+        "claims": [
+          {
+            "text": "TRANSACTION-POST는 잔액 계산을 위해 `ACCOUNT-BALANCE` 프로그램을 호출합니다.",
+            "chunk_ids": [
+              "a61008b04d21b3ec552b9d1de7a211e9a22828af8fced50d1ef69a3153084c6e"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "chunk_id": "a61008b04d21b3ec552b9d1de7a211e9a22828af8fced50d1ef69a3153084c6e",
+            "source_path": "samples/transaction-post.cbl",
+            "language": "cobol",
+            "symbol": "POST-TRANSACTIONS",
+            "chunk_index": 9,
+            "score": 0.5055724382400513
+          }
+        ]
+      },
+      "query_elapsed_seconds": 15.46587,
+      "request_id": "376968fefc8e47dfb2107184b5378b15",
+      "review": {
+        "reviewer": "Codex Orchestrator, first-pass source comparison",
+        "expected_behavior_passed": true,
+        "comment": "Expected program/paragraph and cited public call or file-open code agree.",
+        "cited_code": [
+          {
+            "chunk_id": "a61008b04d21b3ec552b9d1de7a211e9a22828af8fced50d1ef69a3153084c6e",
+            "source_path": "samples/transaction-post.cbl",
+            "symbol": "POST-TRANSACTIONS",
+            "text": "       POST-TRANSACTIONS.\n           MOVE WS-TYPE(WS-INDEX) TO WS-CALL-TYPE\n           MOVE WS-AMOUNT(WS-INDEX) TO WS-CALL-AMOUNT\n           CALL \"ACCOUNT-BALANCE\" USING WS-CALL-TRANSACTION\n                                        WS-CALL-ACCOUNT\n                                        WS-RESULT-CODE\n           PERFORM HANDLE-POST-RESULT.\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "q025",
+      "question": "이 샘플에서 DB2 고객 테이블을 갱신하는 SQL 문은 무엇인가?",
+      "http_status": 200,
+      "response": {
+        "status": "refused",
+        "answer": null,
+        "reason": "insufficient_evidence",
+        "claims": [],
+        "sources": []
+      },
+      "query_elapsed_seconds": 13.533497,
+      "request_id": "728d30eded04474cbc246ae9c3ae47ec",
+      "review": {
+        "reviewer": "Codex Orchestrator, first-pass source comparison",
+        "expected_behavior_passed": true,
+        "comment": "Correct refusal: no DB2 customer UPDATE SQL exists in the approved public corpus.",
+        "cited_code": []
+      }
+    }
+  ],
+  "cleanup": {
+    "captured_at_utc": "2026-11-04T06:08:43.387991+00:00",
+    "api_pods": 0,
+    "secret_deleted": true,
+    "node_observations": [
+      {
+        "time_utc": "2026-11-04T06:08:33.242498+00:00",
+        "node_running": false
+      },
+      {
+        "time_utc": "2026-11-04T06:08:38.317284+00:00",
+        "node_running": false
+      },
+      {
+        "time_utc": "2026-11-04T06:08:43.387991+00:00",
+        "node_running": false
+      }
+    ],
+    "original_storage_files_unchanged": 6,
+    "public_index_rows_preserved": 52,
+    "protected_containers_unchanged": true,
+    "volume_names_unchanged": true,
+    "global_kubeconfig_unchanged": true,
+    "model_and_pvc_deleted": false
+  },
+  "limitations": [
+    "Three public smoke cases, not independent holdout or 30-case accuracy evaluation.",
+    "Context reconstructed from a separate search; actual outgoing model prompt, model ID, token usage and billing were not instrumented.",
+    "Windows/Linux context order mismatch remains unresolved.",
+    "Local ClusterIP and loopback port-forward only; no external IP access or multi-node/high-availability claim."
+  ]
+}

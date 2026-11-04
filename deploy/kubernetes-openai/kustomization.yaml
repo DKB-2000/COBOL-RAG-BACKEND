@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../kubernetes
+patches:
+  - target:
+      kind: ConfigMap
+      name: rag-config
+    patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: rag-config
+        namespace: legacy-rag-lab
+      data:
+        LEGACY_RAG_CHROMA_PATH: /var/lib/legacy-rag/chroma/openai-public-v1
+        LEGACY_RAG_GENERATION_PROVIDER: openai
+        LEGACY_RAG_OPENAI_MODEL: gpt-6-luna
+        LEGACY_RAG_OPENAI_TIMEOUT_SECONDS: "30"
+        LEGACY_RAG_OPENAI_MAX_OUTPUT_TOKENS: "1000"
+  - target:
+      kind: Deployment
+      name: rag-api
+    path: deployment-patch.yaml
